@@ -1,0 +1,61 @@
+uploads = []
+
+[[generated]]
+id = "NOVWTNUYPkeYE16MBMwZW"
+uri = "file://artifacts/portfolio/src/assets/images/headshot.png"
+type = "image"
+title = "headshot of Arab man"
+
+[[generated]]
+id = "MQEASM9ZDyvTa-XyWsVPQ"
+uri = "file://artifacts/portfolio/src/assets/images/service-1.png"
+type = "image"
+title = "service 1 illustration"
+
+[[generated]]
+id = "oCPA7gCQMMbvolurrgx2D"
+uri = "file://artifacts/portfolio/src/assets/images/service-2.png"
+type = "image"
+title = "service 2 illustration"
+
+[[generated]]
+id = "3YM44AbmPTl82wHIvoneC"
+uri = "file://artifacts/portfolio/src/assets/images/service-3.png"
+type = "image"
+title = "service 3 illustration"
+
+[[generated]]
+id = "ZSgEa7WmAizQFKOAqeb_B"
+uri = "file://artifacts/portfolio/src/assets/images/service-4.png"
+type = "image"
+title = "service 4 illustration"
+
+[[generated]]
+id = "-N8cIvi9Hrcc-SWTqcCQv"
+uri = "file://artifacts/portfolio/src/assets/images/service-5.png"
+type = "image"
+title = "service 5 illustration"
+
+[[generated]]
+id = "qLbe-AWsRb_iDCeMSjJ5c"
+uri = "file://artifacts/portfolio/src/assets/images/service-6.png"
+type = "image"
+title = "service 6 illustration"
+
+[[outputs]]
+id = "jsY5xR-Ny5XUgHuJkW3hA"
+uri = "file://artifacts/portfolio/src/assets/images/project-1.jpg"
+type = "image"
+title = "airplane at airport terminal"
+
+[[outputs]]
+id = "-hsGY7hft3pgTZsHd0UFE"
+uri = "file://artifacts/portfolio/src/assets/images/project-2.jpg"
+type = "image"
+title = "modern luxury building exterior night"
+
+[[outputs]]
+id = "zAeVkd499zrafHjglZxE5"
+uri = "file://artifacts/portfolio/src/assets/images/project-3.jpg"
+type = "image"
+title = "modern tech office interior"

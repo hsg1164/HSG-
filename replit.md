@@ -1,44 +1,52 @@
-# [Project name]
+# Mohammed Ziyad Portfolio
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+موقع بورتفوليو شخصي لـ محمد زياد — مطوّر ومحترف رقمي. موقع عربي RTL بتصميم أسود مع أخضر نيون (#00E5A0)، أنيميشن framer-motion، وكل الأقسام الكاملة.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/portfolio run dev` — run the portfolio site (port assigned by workflow)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite + Tailwind CSS
+- Animations: framer-motion
+- Icons: lucide-react, react-icons
+- Font: Cairo (Google Fonts)
+- RTL: Arabic, dir="rtl"
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/portfolio/src/` — main source
+- `artifacts/portfolio/src/components/` — Navbar, Hero, About, Services, Methodology, Projects, Stats, Experience, Clients, Certificates, Contact, Footer
+- `artifacts/portfolio/src/index.css` — theme variables, Cairo font, particle keyframes, marquee keyframes
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Static frontend only — no backend, no database
+- All colors derived from #00E5A0 (mint green) accent on #080808 dark background
+- framer-motion whileInView for scroll-triggered reveals
+- Infinite CSS marquee via @keyframes translateX (no JS)
+- Floating badges use framer-motion animate y: [0, -10, 0] infinite loops
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Arabic RTL personal portfolio for Mohammed Ziyad with: Hero, Skills Marquee, About + floating social badges, "أصنع الفارق" section, 6 Services, Methodology timeline, Projects, Stats counters, Experience timeline, Client logos, Certificates, Contact form, Footer CTA.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Name: Mohammed Ziyad / محمد زياد
+- Site is fully Arabic RTL
+- Accent color: #00E5A0
+- Font will be provided later by user (currently using Cairo as placeholder)
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- react-icons/fa: use FaFacebook (not FaMeta), FaSnapchat (not FaSnapchatGhost), FaMobile (not FaMobileAlt)
+- Google Fonts @import must be the VERY FIRST line in index.css before any other @import
+- No backend — this is a purely static frontend artifact
 
 ## Pointers
 
