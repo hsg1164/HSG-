@@ -1,7 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: 'ThmanyahSans';
+  src: url('/fonts/thmanyahsans-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSans';
+  src: url('/fonts/thmanyahsans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSans';
+  src: url('/fonts/thmanyahsans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSans';
+  src: url('/fonts/thmanyahsans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSans';
+  src: url('/fonts/thmanyahsans-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  src: url('/fonts/thmanyahserifdisplay-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  src: url('/fonts/thmanyahserifdisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  src: url('/fonts/thmanyahserifdisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  src: url('/fonts/thmanyahserifdisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifDisplay';
+  src: url('/fonts/thmanyahserifdisplay-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifText';
+  src: url('/fonts/thmanyahseriftext-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifText';
+  src: url('/fonts/thmanyahseriftext-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifText';
+  src: url('/fonts/thmanyahseriftext-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifText';
+  src: url('/fonts/thmanyahseriftext-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ThmanyahSerifText';
+  src: url('/fonts/thmanyahseriftext-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -41,6 +160,8 @@
   --color-destructive-border: var(--destructive-border);
 
   --font-sans: var(--app-font-sans);
+  --font-display: var(--app-font-display);
+  --font-text: var(--app-font-text);
 }
 
 :root {
@@ -72,7 +193,9 @@
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --app-font-sans: 'Cairo', sans-serif;
+  --app-font-sans: 'ThmanyahSans', sans-serif;
+  --app-font-display: 'ThmanyahSerifDisplay', sans-serif;
+  --app-font-text: 'ThmanyahSerifText', sans-serif;
   --radius: 1rem;
 }
 
@@ -107,41 +230,82 @@
   * {
     @apply border-border;
   }
+  html {
+    font-family: 'ThmanyahSans', sans-serif;
+  }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply antialiased bg-background text-foreground;
+    font-family: 'ThmanyahSans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
   }
 }
 
+/* ── Font utility classes ── */
+.font-display {
+  font-family: 'ThmanyahSerifDisplay', sans-serif;
+}
+
+.font-text {
+  font-family: 'ThmanyahSerifText', sans-serif;
+}
+
+.font-sans {
+  font-family: 'ThmanyahSans', sans-serif;
+}
+
+/* ── Display headings: big h1/h2 use SerifDisplay ── */
+h1, h2 {
+  font-family: 'ThmanyahSerifDisplay', sans-serif;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+h3, h4, h5, h6 {
+  font-family: 'ThmanyahSans', sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+p {
+  font-family: 'ThmanyahSerifText', sans-serif;
+  font-weight: 400;
+}
+
+/* ── Particle sparkle animation ── */
 @keyframes twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1); }
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(15deg); }
 }
 
 .animate-twinkle {
-  animation: twinkle var(--twinkle-duration, 3s) infinite var(--twinkle-delay, 0s);
+  animation: twinkle var(--twinkle-duration, 3s) infinite var(--twinkle-delay, 0s) ease-in-out;
 }
 
+/* ── Marquee animations ── */
 @keyframes marquee {
   0% { transform: translateX(0%); }
-  100% { transform: translateX(100%); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes marquee-reverse {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-reverse {
-  animation: marquee-reverse 30s linear infinite;
+  animation: marquee-reverse 35s linear infinite;
+  will-change: transform;
 }
 
-/* Hide scrollbar for cleaner look */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background));

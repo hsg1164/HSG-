@@ -60,8 +60,8 @@ export default function Navbar() {
         </ul>
 
         {/* Brand */}
-        <a href="#" className="text-xl font-bold text-white tracking-wider">
-          <span className="text-primary">.</span>محمد
+        <a href="#" className="text-xl font-bold text-white tracking-wider" style={{ fontFamily: "'ThmanyahSerifDisplay', sans-serif" }}>
+          <span className="text-primary">.</span>محمد زياد
         </a>
 
       </div>

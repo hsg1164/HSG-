@@ -17,6 +17,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-5xl md:text-7xl font-black mb-6 leading-tight"
+            style={{ fontFamily: "'ThmanyahSerifDisplay', sans-serif" }}
           >
             مستعد للبداية؟ <br/>لنبنِ شيئاً مختلفاً.
           </motion.h2>
@@ -26,6 +27,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-xl md:text-2xl font-medium opacity-80 mb-12 max-w-2xl mx-auto"
+            style={{ fontFamily: "'ThmanyahSerifText', sans-serif" }}
           >
             لديك مشروع أو فكرة أو تريد أن تقول مرحباً؟ يسعدني التواصل.
           </motion.p>

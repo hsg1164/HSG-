@@ -60,9 +60,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-6xl lg:text-[4rem] font-bold leading-tight md:leading-[1.1] text-white mb-6"
+          className="text-5xl md:text-7xl lg:text-[5rem] font-black leading-[1.1] text-white mb-8"
+          style={{ fontFamily: "'ThmanyahSerifDisplay', sans-serif" }}
         >
-          حين تُدار التفاصيل باحتراف، <br className="hidden md:block"/>
+          حين تُدار التفاصيل باحتراف،{" "}
+          <br className="hidden md:block"/>
           يصبح <span className="text-primary">النمو</span> نتيجة طبيعية.
         </motion.h1>
 
@@ -70,7 +72,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-base md:text-lg text-white/60 leading-relaxed max-w-2xl mx-auto mb-10"
+          className="text-base md:text-xl text-white/60 leading-relaxed max-w-2xl mx-auto mb-10"
+          style={{ fontFamily: "'ThmanyahSerifText', sans-serif" }}
         >
           أصمم وأدير منظومات نمو رقمية متكاملة، تجمع بين البحث، محركات الظهور الإعلاني، هندسة التحويل، والأتمتة الذكية، بهدف تحقيق نتائج قابلة للقياس ونمو مستدام يخدم أهدافك التجارية بدقة.
         </motion.p>
