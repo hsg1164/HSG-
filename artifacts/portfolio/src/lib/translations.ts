@@ -209,14 +209,14 @@ export const translations = {
 
     // Stats
     stats_title: "أثـر يُـثـبـت بـالأرقـام",
-    stats_1_title: "ميزانية إعلانية",
-    stats_1_subtitle: "إنفاق شهري",
-    stats_2_title: "أسواق نشطة",
-    stats_2_subtitle: "مصر، قطر، السعودية، الإمارات",
-    stats_3_title: "حضور فعاليات",
-    stats_3_subtitle: "في مؤتمرات حية",
-    stats_4_title: "سنوات خبرة",
-    stats_4_subtitle: "عبر 4 أسواق"
+    stats_1_title: "سنوات خبرة",
+    stats_1_subtitle: "تطوير احترافي",
+    stats_2_title: "مشروع مكتمل",
+    stats_2_subtitle: "حلول رقمية",
+    stats_3_title: "تقنية متقدمة",
+    stats_3_subtitle: "أدوات حديثة",
+    stats_4_title: "دعم مستمر",
+    stats_4_subtitle: "تحديث دائم"
   },
   en: {
     // Navbar
@@ -427,14 +427,14 @@ export const translations = {
 
     // Stats
     stats_title: "IMPACT PROVEN BY NUMBERS",
-    stats_1_title: "Ad Budget",
-    stats_1_subtitle: "Monthly Spend",
-    stats_2_title: "Active Markets",
-    stats_2_subtitle: "Egypt, Qatar, KSA, UAE",
-    stats_3_title: "Event Attendance",
-    stats_3_subtitle: "In Live Conferences",
-    stats_4_title: "Years Experience",
-    stats_4_subtitle: "Across 4 Markets"
+    stats_1_title: "Years Experience",
+    stats_1_subtitle: "Professional Development",
+    stats_2_title: "Completed Projects",
+    stats_2_subtitle: "Digital Solutions",
+    stats_3_title: "Advanced Technologies",
+    stats_3_subtitle: "Modern Tools",
+    stats_4_title: "Continuous Support",
+    stats_4_subtitle: "Permanent Updates"
   }
 };
 

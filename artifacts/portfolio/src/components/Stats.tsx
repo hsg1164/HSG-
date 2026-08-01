@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import { DollarSign, Globe, Users, Calendar } from "lucide-react";
+import { Briefcase, Rocket, Cpu, Headphones } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
 function Counter({ from, to, duration, prefix = "", suffix = "" }: { from: number, to: number, duration: number, prefix?: string, suffix?: string }) {
@@ -31,28 +31,28 @@ export default function Stats() {
   
   const stats = [
     {
-      num: { from: 0, to: 15, duration: 2, prefix: "+$", suffix: "K" },
+      num: { from: 0, to: 5, duration: 1.5, prefix: "+", suffix: "" },
       title: t('stats_1_title'),
       subtitle: t('stats_1_subtitle'),
-      icon: <DollarSign className="w-6 h-6" />
+      icon: <Briefcase className="w-6 h-6" />
     },
     {
-      num: { from: 0, to: 4, duration: 2, prefix: "", suffix: "" },
+      num: { from: 0, to: 20, duration: 2, prefix: "+", suffix: "" },
       title: t('stats_2_title'),
       subtitle: t('stats_2_subtitle'),
-      icon: <Globe className="w-6 h-6" />
+      icon: <Rocket className="w-6 h-6" />
     },
     {
-      num: { from: 0, to: 3000, duration: 2.5, prefix: "+", suffix: "" },
+      num: { from: 0, to: 30, duration: 2, prefix: "+", suffix: "" },
       title: t('stats_3_title'),
       subtitle: t('stats_3_subtitle'),
-      icon: <Users className="w-6 h-6" />
+      icon: <Cpu className="w-6 h-6" />
     },
     {
-      num: { from: 0, to: 5, duration: 1.5, prefix: "+", suffix: "" },
+      num: { from: 0, to: 24, duration: 1.5, prefix: "", suffix: "/7" },
       title: t('stats_4_title'),
       subtitle: t('stats_4_subtitle'),
-      icon: <Calendar className="w-6 h-6" />
+      icon: <Headphones className="w-6 h-6" />
     }
   ];
 
