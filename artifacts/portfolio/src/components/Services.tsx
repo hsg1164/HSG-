@@ -13,7 +13,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service_new_1.png"
+      img: "/assets/images/service_new_1.png"
     },
     {
       num: "02",
@@ -24,7 +24,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service_new_2.png"
+      img: "/assets/images/service_new_2.png"
     },
     {
       num: "03",
@@ -35,7 +35,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service_new_3.png"
+      img: "/assets/images/service_new_3.png"
     },
     {
       num: "04",
@@ -46,7 +46,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service_new_4.png"
+      img: "/assets/images/service_new_4.png"
     },
     {
       num: "05",
@@ -57,7 +57,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service_new_5.png"
+      img: "/assets/images/service_new_5.png"
     },
     {
       num: "06",
@@ -68,7 +68,7 @@ export default function Services() {
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service_new_6.png"
+      img: "/assets/images/service_new_6.png"
     }
   ];
 

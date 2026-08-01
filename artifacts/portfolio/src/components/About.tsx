@@ -66,7 +66,7 @@ export default function About() {
             </div>
 
             <div className="flex-1 w-full rounded-xl overflow-hidden relative mb-4 mt-6">
-              <img src="/src/assets/images/headshot.png" alt="أحمد علي" className="w-full h-full object-cover object-top filter contrast-125" />
+              <img src="/assets/images/headshot.png" alt="أحمد علي" className="w-full h-full object-cover object-top filter contrast-125" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
               
               <div className="absolute bottom-4 left-0 w-full text-center z-20">
