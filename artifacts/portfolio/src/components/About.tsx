@@ -1,46 +1,50 @@
 import { motion } from "framer-motion";
-import { FaInstagram, FaSnapchat, FaTiktok, FaWordpress, FaFacebook, FaMobile, FaCode, FaStar } from "react-icons/fa";
-import { SiGoogleads } from "react-icons/si";
+import { FaReact, FaPython, FaNodeJs, FaDatabase, FaStar } from "react-icons/fa";
+import { SiTypescript, SiNextdotjs, SiJavascript, SiMongodb } from "react-icons/si";
 import { MapPin, ArrowLeft } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function About() {
+  const { lang, t } = useLanguage();
   const floatingBadges = [
-    { text: "إعلانات جوجل", icon: <SiGoogleads />, bg: "bg-[#00E5A0]", textClass: "text-black", y: [0, -10, 0], delay: 0, position: "top-[10%] -left-12 rotate-[-5deg]" },
-    { text: "إعلانات ميتا", icon: <FaFacebook />, bg: "bg-blue-600", textClass: "text-white", y: [0, -8, 0], delay: 0.5, position: "top-[40%] -left-16 rotate-[-10deg]" },
-    { text: "تيك توك", icon: <FaTiktok />, bg: "bg-black border border-white/20", textClass: "text-white", y: [0, -12, 0], delay: 1, position: "top-[70%] -left-8 rotate-[-3deg]" },
-    { text: "تطبيقات الجوال", icon: <FaMobile />, bg: "bg-cyan-500", textClass: "text-black", y: [0, -9, 0], delay: 1.5, position: "bottom-0 left-4 rotate-[5deg]" },
+    { text: "React", icon: <FaReact />, bg: "bg-blue-500 text-white", y: [0, -10, 0], delay: 0, position: "top-[10%] -left-32 rotate-[-5deg]" },
+    { text: "TypeScript", icon: <SiTypescript />, bg: "bg-blue-600 text-white", y: [0, -8, 0], delay: 0.5, position: "top-[40%] -left-40 rotate-[5deg]" },
+    { text: "JavaScript", icon: <SiJavascript />, bg: "bg-yellow-400 text-black", y: [0, -12, 0], delay: 1, position: "top-[65%] -left-28 rotate-[-3deg]" },
+    { text: "SQL", icon: <FaDatabase />, bg: "bg-gray-800 text-white", y: [0, -9, 0], delay: 1.5, position: "bottom-[5%] -left-32 rotate-[12deg]" },
     
-    { text: "Instagram", icon: <FaInstagram />, bg: "bg-pink-600", textClass: "text-white", y: [0, -10, 0], delay: 0.2, position: "top-[15%] -right-12 rotate-[8deg]" },
-    { text: "سناب شات", icon: <FaSnapchat />, bg: "bg-yellow-400", textClass: "text-black", y: [0, -7, 0], delay: 0.7, position: "top-[45%] -right-16 rotate-[12deg]" },
-    { text: "إدارة المحتوى", icon: <FaWordpress />, bg: "bg-blue-500", textClass: "text-white", y: [0, -11, 0], delay: 1.2, position: "top-[75%] -right-10 rotate-[5deg]" },
-    { text: "تطوير الواجهات", icon: <FaCode />, bg: "bg-teal-500", textClass: "text-white", y: [0, -8, 0], delay: 1.7, position: "bottom-0 right-6 rotate-[-6deg]" },
+    { text: "MongoDB", icon: <SiMongodb />, bg: "bg-green-600 text-white", y: [0, -10, 0], delay: 0.2, position: "top-[15%] -right-32 rotate-[8deg]" },
+    { text: "Python", icon: <FaPython />, bg: "bg-blue-500 text-white", y: [0, -7, 0], delay: 0.7, position: "top-[45%] -right-36 rotate-[-5deg]" },
+    { text: "Node.js", icon: <FaNodeJs />, bg: "bg-green-500 text-white", y: [0, -11, 0], delay: 1.2, position: "top-[70%] -right-28 rotate-[5deg]" },
+    { text: "Next.js", icon: <SiNextdotjs />, bg: "bg-black border border-white/20 text-white", y: [0, -8, 0], delay: 1.7, position: "bottom-[10%] -right-20 rotate-[-6deg]" },
   ];
 
+  // pileBadges was removed as part of the 'أصنع الفارق' section removal
+
   return (
-    <section id="about" className="py-24 px-4 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
+    <section id="about" className="pt-24 px-4 relative overflow-hidden flex flex-col items-center">
+      <div className="max-w-4xl mx-auto flex flex-col items-center w-full relative">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <span className="text-primary font-bold tracking-wider uppercase text-sm mb-4 inline-block">نبذة عني</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">حلول رقمية شاملة</h2>
+          <span className="text-primary font-bold text-lg mb-2 inline-block">{t('about_section_title')}</span>
+          <h2 className="text-4xl md:text-[2.5rem] font-bold text-white uppercase">{t('about_title')}</h2>
         </motion.div>
 
-        <div className="relative w-full max-w-lg">
+        <div className="relative w-full max-w-sm mx-auto h-[600px] flex justify-center mt-10">
           {/* Floating Badges */}
           {floatingBadges.map((badge, idx) => (
             <motion.div
               key={idx}
               animate={{ y: badge.y }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: badge.delay }}
-              className={`absolute hidden md:flex items-center gap-2 px-4 py-2 rounded-full ${badge.bg} ${badge.textClass} ${badge.position} z-20 shadow-lg`}
+              className={`absolute hidden md:flex items-center gap-2 px-6 py-3 rounded-full ${badge.bg} ${badge.position} z-20 shadow-lg font-bold text-sm whitespace-nowrap`}
             >
               {badge.icon}
-              <span className="text-sm font-semibold">{badge.text}</span>
+              <span>{badge.text}</span>
             </motion.div>
           ))}
 
@@ -49,44 +53,50 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-card border border-card-border rounded-2xl p-8 relative z-10 text-center shadow-2xl"
+            className="w-full h-full bg-black rounded-[2rem] p-6 flex flex-col relative z-10 shadow-2xl border border-white/5"
           >
-            <div className="flex justify-between items-center mb-8">
-              <div className="flex gap-1 text-yellow-400 text-sm">
+            <div className="flex justify-between items-center w-full absolute top-6 left-0 px-6 z-20">
+              <div className="flex gap-1 text-[#00E5A0] text-xs">
                 <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
               </div>
-              <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                متاح
+              <div className="flex items-center gap-2 text-[#00E5A0] text-xs font-bold">
+                {t('about_available')}
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5A0]"></span>
               </div>
             </div>
 
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-tr from-card-border to-muted border-4 border-card-border mb-6 overflow-hidden relative">
-              {/* Generate Image hook used - placeholder here */}
-              <img src="/src/assets/images/headshot.png" alt="Mohammed Ziyad" className="w-full h-full object-cover" />
-            </div>
-
-            <h3 className="text-3xl font-bold text-white mb-2">محمد زياد</h3>
-            <p className="text-primary font-medium text-lg mb-4">مطوّر ومحترف رقمي</p>
-            <p className="text-white/50 text-sm mb-8 flex items-center justify-center gap-1"><MapPin className="w-4 h-4" /> متاح للعمل عن بُعد</p>
-
-            <div className="grid grid-cols-3 gap-4 border-y border-white/10 py-6 mb-8">
-              <div>
-                <p className="text-2xl font-bold text-white mb-1">4</p>
-                <p className="text-xs text-white/50 uppercase tracking-widest">دول</p>
-              </div>
-              <div className="border-x border-white/10">
-                <p className="text-2xl font-bold text-white mb-1">+50</p>
-                <p className="text-xs text-white/50 uppercase tracking-widest">مشروع</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white mb-1">+5</p>
-                <p className="text-xs text-white/50 uppercase tracking-widest">سنوات</p>
+            <div className="flex-1 w-full rounded-xl overflow-hidden relative mb-4 mt-6">
+              <img src="/src/assets/images/headshot.png" alt="أحمد علي" className="w-full h-full object-cover object-top filter contrast-125" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+              
+              <div className="absolute bottom-4 left-0 w-full text-center z-20">
+                <h3 className="text-3xl font-bold text-white mb-1">{t('hero_title').replace('.', '')}</h3>
+                <p className="text-[#00E5A0] font-bold text-sm" dir="ltr">Full Stack Developer</p>
+                <p className="text-white/40 text-xs mt-2 flex items-center justify-center gap-1"><MapPin className="w-3 h-3" /> {t('about_location')}</p>
               </div>
             </div>
 
-            <a href="#contact" className="inline-flex items-center justify-center gap-2 bg-primary text-black font-bold px-8 py-3 rounded-xl hover:bg-primary/90 transition-colors w-full sm:w-auto">
-              لنعمل معاً <ArrowLeft className="w-5 h-5" />
+            <div className="grid grid-cols-2 gap-y-4 border-t border-white/5 pt-6 pb-2 mb-4 font-digital" dir="ltr">
+              <div className="text-center">
+                <p className="text-xl font-bold text-white mb-1">40+</p>
+                <p className="text-[10px] text-white/40 font-sans">Projects</p>
+              </div>
+              <div className="text-center border-l border-white/5">
+                <p className="text-xl font-bold text-white mb-1">10+</p>
+                <p className="text-[10px] text-white/40 font-sans">Technologies</p>
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-white mb-1">100K+</p>
+                <p className="text-[10px] text-white/40 font-sans">Lines of Code</p>
+              </div>
+              <div className="text-center border-l border-white/5">
+                <p className="text-xl font-bold text-white mb-1">24/7</p>
+                <p className="text-[10px] text-white/40 font-sans">Support</p>
+              </div>
+            </div>
+
+            <a href="#contact" className="flex items-center justify-center gap-2 bg-[#00E5A0] text-black font-bold text-sm py-4 rounded-full hover:bg-primary/90 transition-colors w-full">
+              {t('about_btn')} <ArrowLeft className="w-4 h-4" style={{ transform: lang === 'en' ? 'rotate(180deg)' : 'none' }} />
             </a>
           </motion.div>
         </div>
@@ -95,59 +105,10 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center text-white/60 leading-relaxed max-w-2xl text-lg"
+          className="mt-20 text-center text-white/50 leading-relaxed max-w-3xl text-sm md:text-base opentype-features kashida-enabled"
         >
-          لا أؤمن بالحلول الجاهزة. كل مشروع يمثل تحدياً فريداً يتطلب فهماً عميقاً للجمهور، تحليلاً دقيقاً للبيانات، وبناء استراتيجية مخصصة تجمع بين التسويق الفعّال والتقنية المتطورة لضمان أقصى عائد على الاستثمار.
+          {t('about_desc')}
         </motion.p>
-      </div>
-
-      {/* MAKE A DIFFERENCE SECTION included here for flow */}
-      <div className="mt-32 relative w-full overflow-hidden min-h-[40vh] flex flex-col items-center justify-center">
-        <motion.h2 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.08 }}
-          viewport={{ once: true }}
-          className="text-[6rem] md:text-[10rem] font-black text-white whitespace-nowrap opacity-10 select-none z-0"
-        >
-          أصنع الفارق ✦
-        </motion.h2>
-
-        <motion.div 
-          className="absolute bottom-0 left-0 w-full h-full pointer-events-none overflow-hidden z-10 flex flex-wrap items-end justify-center pb-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.05 } }
-          }}
-        >
-          {Array.from({length: 20}).map((_, i) => {
-            const colors = ['bg-[#00E5A0] text-black', 'bg-blue-500 text-white', 'bg-yellow-400 text-black', 'bg-pink-500 text-white', 'bg-white text-black', 'bg-cyan-400 text-black', 'bg-red-500 text-white'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const size = Math.random() > 0.5 ? 'scale-100' : 'scale-75 opacity-70';
-            
-            return (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { y: 200, opacity: 0, rotate: 0 },
-                  visible: { 
-                    y: Math.random() * -150 - 50, 
-                    opacity: 1,
-                    rotate: Math.random() * 60 - 30,
-                    x: Math.random() * 400 - 200,
-                    transition: { type: "spring", bounce: 0.4, duration: 1 + Math.random() }
-                  }
-                }}
-                className={`absolute bottom-0 w-8 h-8 rounded-md ${color} ${size}`}
-                style={{
-                  left: `${50 + (Math.random() * 80 - 40)}%`,
-                }}
-              />
-            )
-          })}
-        </motion.div>
       </div>
 
     </section>

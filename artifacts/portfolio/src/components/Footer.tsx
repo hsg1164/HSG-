@@ -1,86 +1,103 @@
 import { motion } from "framer-motion";
-import { FaLinkedinIn, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiGithub } from "react-icons/fi";
 import { ArrowLeft, ArrowUp } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Footer() {
+  const { t, lang } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <>
-      {/* Footer CTA */}
-      <section className="bg-primary py-24 px-4 text-black text-center">
-        <div className="max-w-4xl mx-auto">
+    <footer className="w-full relative">
+      
+      {/* Main Green Section (CTA + Footer Links) */}
+      <div className="bg-[#4FF0A7] text-black rounded-t-[2rem] md:rounded-t-[3rem] pt-16 pb-10 px-4 shadow-[0_-10px_40px_rgba(79,240,167,0.1)] relative z-10">
+        
+        {/* CTA Section */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs font-bold mb-3 opacity-80 uppercase"
+          >
+            {t('footer_ready')}
+          </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-black mb-6 leading-tight"
-            style={{ fontFamily: "'ThmanyahSerifDisplay', sans-serif" }}
+            className="text-3xl md:text-5xl font-bold mb-4 leading-tight text-black uppercase"
+            style={lang === 'ar' ? { fontFamily: "'ThmanyahSerifDisplay', sans-serif" } : {}}
           >
-            مستعد للبداية؟ <br/>لنبنِ شيئاً مختلفاً.
+            {t('footer_build')}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl md:text-2xl font-medium opacity-80 mb-12 max-w-2xl mx-auto"
-            style={{ fontFamily: "'ThmanyahSerifText', sans-serif" }}
+            className="text-xs md:text-sm font-medium opacity-80 mb-8 max-w-md mx-auto"
           >
-            لديك مشروع أو فكرة أو تريد أن تقول مرحباً؟ يسعدني التواصل.
+            {t('footer_desc')}
           </motion.p>
+          
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col sm:flex-row justify-center gap-4"
+            className="flex flex-wrap justify-center items-center gap-3"
           >
-            <a href="#contact" className="px-8 py-4 bg-black text-primary font-bold rounded-xl hover:bg-black/90 transition-colors flex items-center justify-center gap-2 text-lg">
-              ابدأ مشروعاً <ArrowLeft className="w-5 h-5" />
+            <a 
+              href="#contact" 
+              className="px-5 py-2 bg-white text-black font-bold border border-black rounded-full hover:bg-black hover:text-white transition-all flex items-center gap-1.5 text-xs shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" style={{ transform: lang === 'en' ? 'rotate(180deg)' : 'none' }} /> {t('footer_start')}
             </a>
-            <a href="#contact" className="px-8 py-4 bg-transparent border-2 border-black text-black font-bold rounded-xl hover:bg-black/5 transition-colors text-lg flex items-center justify-center">
-              قُل مرحباً
+            <a 
+              href="#contact" 
+              className="px-5 py-2 bg-white text-black font-bold border border-black rounded-full hover:bg-black hover:text-white transition-all text-xs shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+            >
+              {t('footer_hi')}
             </a>
           </motion.div>
         </div>
-      </section>
 
-      {/* Main Footer */}
-      <footer className="bg-black pt-20 pb-8 px-4 border-t border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        {/* Footer Links Section */}
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 ${lang === 'ar' ? 'text-center md:text-right' : 'text-center md:text-left'}`}>
             
-            {/* Brand */}
-            <div className="md:col-span-5">
-              <a href="#" className="text-3xl font-bold text-white tracking-wider mb-6 inline-block">
-                <span className="text-primary">.</span>محمد زياد
-              </a>
-              <p className="text-white/60 leading-relaxed max-w-sm mb-8">
-                أصمم وأدير منظومات نمو رقمية متكاملة تجمع بين التسويق، التقنية، والبيانات.
+            {/* Brand / Bio */}
+            <div className={`flex flex-col items-center ${lang === 'ar' ? 'md:items-start' : 'md:items-start'}`}>
+              <h3 className="text-lg font-bold mb-3">{t('footer_name')} <span className="text-black/50">.</span></h3>
+              <p className={`text-xs font-medium opacity-80 leading-relaxed max-w-xs mb-4 text-center ${lang === 'ar' ? 'md:text-right' : 'md:text-left'}`}>
+                {t('footer_bio')}
               </p>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-primary hover:border-primary transition-colors">
-                  <FaLinkedinIn />
+              <div className="flex gap-3">
+                <a href="mailto:cpshzt@gmail.com" className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                  <FaEnvelope className="w-3.5 h-3.5" />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-primary hover:border-primary transition-colors">
-                  <FaWhatsapp />
+                <a href="https://github.com/HSG6" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                  <FiGithub className="w-3.5 h-3.5" />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-primary hover:border-primary transition-colors">
-                  <FaEnvelope />
+                <a href="https://x.com/Moh_HSG" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                  <FaXTwitter className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
 
-            {/* Links */}
-            <div className="md:col-span-3">
-              <h4 className="text-lg font-bold text-white mb-6">التصفح</h4>
-              <ul className="space-y-4">
-                {["عني", "الخدمات", "المشاريع", "الخبرات", "الشهادات", "تواصل"].map((link, i) => (
+            {/* Navigation */}
+            <div className="flex flex-col items-center">
+              <h4 className="text-xs font-bold mb-4 opacity-70 uppercase">{t('footer_nav')}</h4>
+              <ul className="space-y-2">
+                {[t('nav_about'), t('nav_services'), t('nav_projects'), t('nav_experience'), t('nav_contact')].map((link, i) => (
                   <li key={i}>
-                    <a href={`#${["about", "services", "projects", "experience", "certificates", "contact"][i]}`} className="text-white/60 hover:text-primary transition-colors text-sm font-medium">
+                    <a href={`#${["about", "services", "projects", "experience", "contact"][i]}`} className="text-xs font-bold hover:opacity-70 transition-opacity">
                       {link}
                     </a>
                   </li>
@@ -89,38 +106,47 @@ export default function Footer() {
             </div>
 
             {/* Contact */}
-            <div className="md:col-span-4">
-              <h4 className="text-lg font-bold text-white mb-6">تواصل مباشر</h4>
-              <ul className="space-y-4">
-                <li className="flex flex-col gap-1">
-                  <span className="text-xs text-white/40 uppercase tracking-widest">البريد الإلكتروني</span>
-                  <a href="mailto:hello@mohammedz.dev" className="text-white/80 hover:text-primary transition-colors font-mono text-sm" dir="ltr">hello@mohammedz.dev</a>
+            <div className={`flex flex-col items-center ${lang === 'ar' ? 'md:items-end' : 'md:items-end'}`}>
+              <h4 className="text-xs font-bold mb-4 opacity-70 uppercase">{t('footer_contact')}</h4>
+              <ul className={`space-y-2 text-center mb-4 ${lang === 'ar' ? 'md:text-left' : 'md:text-right'}`} dir="ltr">
+                <li>
+                  <a href="mailto:cpshzt@gmail.com" className="text-xs font-bold hover:opacity-70 transition-opacity">
+                    cpshzt@gmail.com
+                  </a>
                 </li>
-                <li className="flex flex-col gap-1">
-                  <span className="text-xs text-white/40 uppercase tracking-widest">واتساب</span>
-                  <a href="#" className="text-white/80 hover:text-primary transition-colors font-mono text-sm" dir="ltr">+20 100 000 0000</a>
+                <li>
+                  <a href="tel:+201011648156" className="text-xs font-bold hover:opacity-70 transition-opacity">
+                    +20 101 164 8156
+                  </a>
                 </li>
-                <li className="flex flex-col gap-1">
-                  <span className="text-xs text-white/40 uppercase tracking-widest">الموقع</span>
-                  <span className="text-white/80 text-sm">القاهرة، مصر (متاح عالمياً)</span>
+                <li className="text-xs font-bold">
+                  {t('about_location')}
                 </li>
               </ul>
+              <button 
+                onClick={scrollToTop}
+                className="px-4 py-1.5 bg-black text-white rounded-full text-[10px] font-bold hover:opacity-80 transition-opacity flex items-center gap-1.5"
+              >
+                {t('footer_top')} <ArrowUp className="w-3 h-3" />
+              </button>
             </div>
-          </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4">
-            <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} محمد زياد. جميع الحقوق محفوظة.
-            </p>
-            <button 
-              onClick={scrollToTop}
-              className="px-6 py-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-full text-sm font-medium transition-colors flex items-center gap-2"
-            >
-              اذهب للأعلى <ArrowUp className="w-4 h-4" />
-            </button>
           </div>
         </div>
-      </footer>
-    </>
+      </div>
+
+      {/* Very Bottom Dark Bar */}
+      <div className={`bg-[#0a0a0a] border-t border-white/5 py-4 px-4 text-center relative z-0 ${lang === 'ar' ? 'md:text-left' : 'md:text-right'}`}>
+        <div className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-4 ${lang === 'ar' ? 'justify-between' : 'justify-between'}`}>
+          <p className="text-[10px] text-white/40 font-medium">
+            {t('footer_credit')}
+          </p>
+          <p className="text-[10px] text-white/40 font-medium" dir="ltr">
+            © {new Date().getFullYear()} {t('footer_name')}. {t('footer_rights')}
+          </p>
+        </div>
+      </div>
+
+    </footer>
   );
 }

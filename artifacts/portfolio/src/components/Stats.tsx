@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import { Wallet, Globe, Ticket, Hourglass } from "lucide-react";
+import { DollarSign, Globe, Users, Calendar } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Counter({ from, to, duration, prefix = "", suffix = "" }: { from: number, to: number, duration: number, prefix?: string, suffix?: string }) {
   const [count, setCount] = useState(from);
@@ -26,64 +27,84 @@ function Counter({ from, to, duration, prefix = "", suffix = "" }: { from: numbe
 }
 
 export default function Stats() {
+  const { t, lang } = useLanguage();
+  
   const stats = [
     {
       num: { from: 0, to: 15, duration: 2, prefix: "+$", suffix: "K" },
-      title: "ميزانية إعلانية",
-      subtitle: "إنفاق شهري مدار",
-      icon: <Wallet className="w-6 h-6" />
+      title: t('stats_1_title'),
+      subtitle: t('stats_1_subtitle'),
+      icon: <DollarSign className="w-6 h-6" />
     },
     {
       num: { from: 0, to: 4, duration: 2, prefix: "", suffix: "" },
-      title: "أسواق نشطة",
-      subtitle: "مصر، قطر، السعودية، الإمارات",
+      title: t('stats_2_title'),
+      subtitle: t('stats_2_subtitle'),
       icon: <Globe className="w-6 h-6" />
     },
     {
       num: { from: 0, to: 3000, duration: 2.5, prefix: "+", suffix: "" },
-      title: "حضور فعاليات",
-      subtitle: "في مؤتمرات حية",
-      icon: <Ticket className="w-6 h-6" />
+      title: t('stats_3_title'),
+      subtitle: t('stats_3_subtitle'),
+      icon: <Users className="w-6 h-6" />
     },
     {
       num: { from: 0, to: 5, duration: 1.5, prefix: "+", suffix: "" },
-      title: "سنوات خبرة",
-      subtitle: "عبر 4 أسواق إقليمية",
-      icon: <Hourglass className="w-6 h-6" />
+      title: t('stats_4_title'),
+      subtitle: t('stats_4_subtitle'),
+      icon: <Calendar className="w-6 h-6" />
     }
   ];
 
   return (
-    <section className="py-24 px-4 bg-background">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 px-4 relative overflow-hidden">
+      {/* Dotted Background Grid */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#ffffff15_1px,_transparent_1px)] bg-[length:30px_30px] opacity-40 pointer-events-none"></div>
+      
+      <div className="max-w-[65rem] mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
+          className="text-4xl md:text-5xl font-bold text-center text-white mb-16 leading-relaxed uppercase"
+          style={lang === 'ar' ? { fontFamily: "'ThmanyahSerifDisplay', sans-serif" } : {}}
         >
-          أثر يُثبَت بالأرقام
+          {t('stats_title')}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-card border border-card-border p-8 rounded-2xl flex flex-col items-center text-center hover:border-primary/50 transition-colors group"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: idx * 0.15, duration: 0.6 }}
+              className="relative group rounded-3xl overflow-hidden p-[1px]"
             >
-              <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative">
-                <span className="opacity-0 group-hover:opacity-100 absolute w-full h-full rounded-full bg-primary/20 animate-ping"></span>
-                {stat.icon}
+              {/* Static faint border */}
+              <div className="absolute inset-0 bg-[#00E5A0]/15 rounded-3xl"></div>
+              
+              {/* Animated rotating border (Double Beams, Reversed, Extremely Slow, Softer) */}
+              <div className="absolute inset-[-150%] bg-[conic-gradient(from_0deg,transparent_0_25%,#00E5A0_50%,transparent_50%_75%,#00E5A0_100%)] animate-[spin_20s_linear_infinite_reverse] opacity-50 group-hover:opacity-100 transition-opacity duration-1000 blur-[3px]"></div>
+
+              {/* Card Content */}
+              <div className="relative bg-[#0a0a0a] rounded-3xl py-12 px-4 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-full border border-[#00E5A0]/60 text-[#00E5A0] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-700 relative">
+                  {stat.icon}
+                </div>
+                
+                <div 
+                  className="text-4xl md:text-5xl font-bold text-[#e0ffe5] mb-6"
+                  style={lang === 'ar' ? { fontFamily: "'ThmanyahSerifDisplay', sans-serif" } : {}}
+                  dir="ltr"
+                >
+                  <Counter {...stat.num} />
+                </div>
+                
+                <h4 className="text-lg font-bold text-white mb-2">{stat.title}</h4>
+                <p className="text-xs text-white/50 leading-relaxed max-w-[150px]">{stat.subtitle}</p>
               </div>
-              <div className="text-4xl md:text-5xl font-black text-white mb-4">
-                <Counter {...stat.num} />
-              </div>
-              <h4 className="text-lg font-bold text-white mb-1">{stat.title}</h4>
-              <p className="text-sm text-white/50">{stat.subtitle}</p>
             </motion.div>
           ))}
         </div>

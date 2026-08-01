@@ -1,39 +1,50 @@
+import { useLanguage } from "../contexts/LanguageContext";
+
 export default function SkillsMarquee() {
-  const row1 = [
-    "تحليل البيانات", "تطبيقات الجوال", "إعلانات جوجل", "الذكاء الاصطناعي", 
-    "تطوير الويب", "إعلانات ميتا", "البرمجة", "تحسين محركات البحث", 
-    "تصميم الواجهات", "اختراق النمو", "إدارة المحتوى"
-  ];
-  
-  const row2 = [
-    "إعلانات سناب شات", "إدارة المحتوى", "تطوير الواجهات", "البرمجة", 
-    "استراتيجية العلامة التجارية", "إعلانات ميتا", "اختراق النمو", 
-    "تطوير الويب", "الذكاء الاصطناعي"
-  ];
+  const { t } = useLanguage();
+  const row1 = t('tech_row1') as unknown as string[];
+  const row2 = t('tech_row2') as unknown as string[];
 
   return (
-    <section className="py-10 border-y border-white/5 bg-black overflow-hidden flex flex-col gap-6">
-      <div className="relative flex overflow-x-hidden whitespace-nowrap">
-        <div className="animate-marquee flex gap-6 px-3">
-          {[...row1, ...row1, ...row1].map((skill, i) => (
-            <div key={i} className="flex items-center gap-6">
-              <div className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white/90 text-lg whitespace-nowrap">
+    <section className="py-12 bg-transparent overflow-hidden flex flex-col gap-6 relative" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
+      <style>{`
+        @keyframes skills-marquee-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes skills-marquee-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-skills-left {
+          animation: skills-marquee-left 40s linear infinite;
+        }
+        .animate-skills-right {
+          animation: skills-marquee-right 40s linear infinite;
+        }
+      `}</style>
+      
+      <div className="relative flex overflow-hidden whitespace-nowrap" dir="ltr">
+        <div className="animate-skills-left flex items-center w-max">
+          {[...row1, ...row1].map((skill, i) => (
+            <div key={i} className="flex items-center">
+              <div className="px-6 py-2 rounded-full bg-primary text-black font-bold text-sm whitespace-nowrap hover:scale-105 transition-transform mx-4">
                 {skill}
               </div>
-              <span className="text-primary text-xs">✦</span>
+              <span className="text-white/40 text-xl font-serif">✳</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="relative flex overflow-x-hidden whitespace-nowrap">
-        <div className="animate-marquee-reverse flex gap-6 px-3">
-          {[...row2, ...row2, ...row2].map((skill, i) => (
-            <div key={i} className="flex items-center gap-6">
-              <div className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white/90 text-lg whitespace-nowrap">
+      <div className="relative flex overflow-hidden whitespace-nowrap" dir="ltr">
+        <div className="animate-skills-right flex items-center w-max">
+          {[...row2, ...row2].map((skill, i) => (
+            <div key={i} className="flex items-center">
+              <div className="px-6 py-2 rounded-full bg-primary text-black font-bold text-sm whitespace-nowrap hover:scale-105 transition-transform mx-4">
                 {skill}
               </div>
-              <span className="text-primary text-xs">✦</span>
+              <span className="text-white/40 text-xl font-serif">✳</span>
             </div>
           ))}
         </div>

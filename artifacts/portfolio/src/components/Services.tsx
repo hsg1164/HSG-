@@ -1,77 +1,79 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Services() {
+  const { t, lang } = useLanguage();
   const services = [
     {
       num: "01",
-      title: "التسويق بالأداء",
-      desc: "حملات مبنية على البيانات عبر جوجل وميتا وتيك توك لتحقيق أعلى عائد على الاستثمار واستقطاب عملاء محتملين بجودة عالية.",
-      tags: ["إعلانات جوجل", "إعلانات ميتا", "إعلانات تيك توك", "إعلانات سناب شات"],
+      title: t('service_1_title'),
+      desc: t('service_1_desc'),
+      tags: ["React", "Next.js", "TypeScript", "JavaScript"],
       bg: "bg-[#00E5A0]",
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service-1.png"
+      img: "/src/assets/images/service_new_1.png"
     },
     {
       num: "02",
-      title: "تحسين محركات البحث",
-      desc: "تدقيق تقني، استراتيجية كلمات مفتاحية، تحسين داخلي وخارجي لضمان تصدر نتائج البحث العضوية بشكل مستدام.",
-      tags: ["تدقيق تقني", "تحسين داخلي", "تحسين خارجي", "تحسين محلي"],
+      title: t('service_2_title'),
+      desc: t('service_2_desc'),
+      tags: ["Node.js", "Go", "REST API", "Authentication"],
       bg: "bg-[#f5f5f5]",
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service-2.png"
+      img: "/src/assets/images/service_new_2.png"
     },
     {
       num: "03",
-      title: "تطوير الويب",
-      desc: "مواقع سريعة وحديثة بأفضل التقنيات تضمن تجربة مستخدم استثنائية وتحويل الزوار إلى عملاء.",
-      tags: ["React", "Next.js", "Node.js", "API"],
+      title: t('service_3_title'),
+      desc: t('service_3_desc'),
+      tags: ["MongoDB", "SQL", "Database Design", "Performance Optimization"],
       bg: "bg-[#00E5A0]",
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service-3.png"
+      img: "/src/assets/images/service_new_3.png"
     },
     {
       num: "04",
-      title: "الذكاء الاصطناعي والأتمتة",
-      desc: "روبوتات محادثة ذكية، أتمنة سير العمل للتقليل من المهام الروتينية وزيادة الإنتاجية التشغيلية.",
-      tags: ["روبوتات ذكية", "أتمنة الأنظمة", "تكامل الأنظمة", "ذكاء اصطناعي"],
+      title: t('service_4_title'),
+      desc: t('service_4_desc'),
+      tags: ["UI Design", "UX Design", "Responsive Design", "Figma"],
       bg: "bg-[#f5f5f5]",
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service-4.png"
+      img: "/src/assets/images/service_new_4.png"
     },
     {
       num: "05",
-      title: "البيانات والتحليلات",
-      desc: "إعداد تحليلات جوجل وإدارة العلامات وتتبع التحويلات لامتلاك رؤية واضحة عن أداء قنواتك الرقمية.",
-      tags: ["تحليلات جوجل", "إدارة العلامات", "لوحات التقارير", "أدوات مشابهة المواقع"],
+      title: t('service_5_title'),
+      desc: t('service_5_desc'),
+      tags: ["Core Web Vitals", "SEO", "Performance", "Accessibility"],
       bg: "bg-[#00E5A0]",
       text: "text-black",
       badgeText: "text-black bg-black/10 border-black/20",
       tagStyle: "bg-black/10 text-black",
-      img: "/src/assets/images/service-5.png"
+      img: "/src/assets/images/service_new_5.png"
     },
     {
       num: "06",
-      title: "استراتيجية رقمية شاملة",
-      desc: "من الفكرة إلى المنتج، ربط التسويق والمنتج والتقنية لبناء خطة نمو مستدامة ومترابطة.",
-      tags: ["الاستراتيجية", "الهوية", "تجربة المستخدم", "النمو"],
+      title: t('service_6_title'),
+      desc: t('service_6_desc'),
+      tags: ["Bug Fixes", "Maintenance", "Security", "Git"],
       bg: "bg-[#f5f5f5]",
       text: "text-black",
       badgeText: "text-black bg-black/5 border-black/10",
       tagStyle: "bg-black/5 text-black border border-black/10",
-      img: "/src/assets/images/service-6.png"
+      img: "/src/assets/images/service_new_6.png"
     }
   ];
 
   return (
-    <section id="services" className="py-24 px-4 bg-black">
+    <section id="services" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         
         <motion.div
@@ -80,47 +82,51 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="text-primary font-bold tracking-wider uppercase text-sm mb-4 inline-block">الخدمات</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">خبرات تصنع الفارق</h2>
+          <span className="text-primary font-bold tracking-wider uppercase text-sm mb-4 inline-block">{t('services_section_title')}</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white uppercase">{t('services_title')}</h2>
         </motion.div>
 
-        <div className="flex flex-col space-y-6">
+        <div className="relative pb-24">
           {services.map((service, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`w-full rounded-[2rem] overflow-hidden ${service.bg} ${service.text} flex flex-col md:flex-row relative group hover:scale-[1.01] transition-transform duration-500`}
+              className={`w-full rounded-[2.5rem] overflow-hidden ${service.bg} ${service.text} flex flex-col md:flex-row relative group sticky shadow-2xl shadow-black/50 mb-8 border border-white/10`}
+              style={{ top: '12vh', zIndex: idx }}
             >
               {/* Giant number */}
-              <div className="absolute top-4 left-6 text-[8rem] font-black opacity-5 pointer-events-none leading-none select-none z-0">
+              <div 
+                className={`absolute -top-4 ${lang === 'ar' ? 'left-6' : 'right-6'} text-[10rem] md:text-[14rem] font-bold pointer-events-none leading-none select-none z-0 ${service.bg === 'bg-[#00E5A0]' ? 'text-black/10' : 'text-[#00E5A0]/20'}`}
+                style={{ fontFamily: "'ThmanyahSerifDisplay', sans-serif" }}
+              >
                 {service.num}
               </div>
 
               {/* Illustration half */}
-              <div className="w-full md:w-1/2 p-8 md:p-12 flex items-center justify-center relative z-10">
-                <img src={service.img} alt={service.title} className="w-full max-w-sm mix-blend-multiply opacity-90 transition-transform duration-500 group-hover:scale-105" />
+              <div className="w-full md:w-1/2 p-8 md:p-12 flex items-center justify-center relative z-10 min-h-[300px]">
+                <img src={service.img} alt={service.title} className="w-full max-w-sm mix-blend-multiply opacity-90 transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1" />
               </div>
 
               {/* Content half */}
-              <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-10 border-t md:border-t-0 md:border-r border-black/5">
-                <div className={`w-fit px-4 py-1.5 rounded-full border mb-6 font-bold flex items-center gap-2 ${service.badgeText}`}>
-                  <span className="text-sm">{service.num}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-black/40"></span>
-                  <span className="text-xs">الخدمة</span>
+              <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-10 border-t md:border-t-0 md:border-r border-black/5 bg-gradient-to-l from-transparent to-black/5">
+                <div className={`w-fit px-4 py-1.5 rounded-full border mb-8 font-bold flex items-center gap-2 ${service.badgeText} shadow-sm backdrop-blur-sm`}>
+                  <span className="text-sm font-sans tracking-widest">{service.num}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40"></span>
+                  <span className="text-xs">{t('service_badge')}</span>
                 </div>
                 
-                <h3 className="text-3xl md:text-4xl font-bold mb-6">{service.title}</h3>
+                <h3 className="text-3xl md:text-5xl font-bold mb-6">{service.title}</h3>
                 
-                <p className="text-lg opacity-80 leading-relaxed mb-10 max-w-md">
+                <p className="text-lg md:text-xl opacity-80 leading-relaxed mb-10 max-w-md">
                   {service.desc}
                 </p>
 
                 <div className="flex flex-wrap gap-2">
                   {service.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className={`px-4 py-2 rounded-full text-sm font-semibold ${service.tagStyle}`}>
+                    <span key={tIdx} className={`px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:scale-105 transition-transform cursor-default ${service.tagStyle}`}>
                       {tag}
                     </span>
                   ))}

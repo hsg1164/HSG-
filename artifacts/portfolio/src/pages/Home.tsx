@@ -11,10 +11,11 @@ import Clients from "../components/Clients";
 import Certificates from "../components/Certificates";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import FloatingWidgets from "../components/FloatingWidgets";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+    <main className="min-h-screen text-foreground overflow-x-hidden relative">
       <Navbar />
       <Hero />
       <SkillsMarquee />
@@ -28,6 +29,7 @@ export default function Home() {
       <Certificates />
       <Contact />
       <Footer />
+      <FloatingWidgets />
     </main>
   );
 }
