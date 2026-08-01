@@ -3,7 +3,8 @@ import { HealthCheckResponse } from "@workspace/api-zod";
 
 const router: IRouter = Router();
 
-router.get("/healthz", (_req, res) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+router.get("/healthz", (_req: any, res: any) => {
   const data = HealthCheckResponse.parse({ status: "ok" });
   res.json(data);
 });
