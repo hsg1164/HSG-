@@ -1,0 +1,5 @@
+{
+  "framework": "vite",
+  "buildCommand": "vite build --config vite.config.ts",
+  "outputDirectory": "public"
+}

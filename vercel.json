@@ -1,5 +1,0 @@
-{
-  "framework": "vite",
-  "buildCommand": "pnpm --filter @workspace/portfolio run build",
-  "outputDirectory": "artifacts/portfolio/dist/public"
-}
