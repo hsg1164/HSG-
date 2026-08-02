@@ -75,6 +75,22 @@ export const translations = {
     proj_3_title: "نـور الإسـلام",
     proj_3_desc: "تطبيق ويب تفاعلي يقدم محتوى إسلامي موثوق، يتضمن القرآن الكريم، الأحاديث، مقالات دينية، ومواقيت الصلاة الدقيقة بناءً على الموقع الجغرافي للمستخدم.\n\nحرصت في هذا المشروع على تقديم واجهة مستخدم هادئة ومريحة للعين، مع تحسين الأداء لضمان وصول سريع للمحتوى حتى مع سرعات الإنترنت الضعيفة، وتوافق تام مع الهواتف الذكية.",
 
+    // Project 4
+    proj_4_company: "مركز د. زياد أبو دقة",
+    proj_4_subtitle: "عيادة الأمراض الجلدية والتجميل",
+    proj_4_badgeLeft: "Healthcare",
+    proj_4_badgeRight: "2026",
+    proj_4_title: "مركز زياد أبو دقة الطبي",
+    proj_4_desc: "منصة رقمية احترافية لعيادة الأمراض الجلدية والتجميل. قمت بتصميم وتطوير الموقع الرسمي لمركز د. زياد أبو دقة، بهدف تقديم تجربة رقمية حديثة تعكس احترافية المركز وتُسهّل على المرضى الوصول إلى الخدمات الطبية والمعلومات اللازمة بسرعة وسهولة. يتضمن الموقع صفحات تعريفية للطبيب، والمؤهلات الأكاديمية، والخدمات العلاجية، بالإضافة إلى واجهة استخدام عصرية ومتجاوبة مع جميع الأجهزة.\n\nتم تطوير الموقع مع التركيز على الأداء العالي، وسرعة التحميل، وتحسين تجربة المستخدم (UI/UX)، بالإضافة إلى تحسين محركات البحث (SEO) لضمان ظهور أفضل في نتائج البحث. كما تم بناء هيكل مرن وقابل للتطوير يسمح بإضافة خدمات جديدة، ونظام حجوزات، ولوحة إدارة مستقبلًا دون الحاجة لإعادة بناء المشروع.",
+
+    // Project 5
+    proj_5_company: "محمصة بدر الدين",
+    proj_5_subtitle: "إدارة وعرض الفروع",
+    proj_5_badgeLeft: "Business",
+    proj_5_badgeRight: "2026",
+    proj_5_title: "محمصة بدر الدين",
+    proj_5_desc: "منصة رقمية متكاملة لإدارة وعرض فروع محمصة بدر الدين. قمت بتصميم وتطوير الموقع الرسمي لـ محمصة بدر الدين بهدف توفير تجربة رقمية حديثة تسهل على العملاء استكشاف الفروع، والتواصل المباشر، والوصول السريع إلى معلومات المنتجات والخدمات. تم تصميم الموقع بواجهة احترافية تعكس هوية العلامة التجارية مع التركيز على البساطة وسهولة الاستخدام.\n\nيتضمن الموقع نظامًا ذكيًا لإدارة الفروع، حيث يمكن للمستخدم التنقل بين الفروع المختلفة وعرض أوقات العمل، وأرقام التواصل، وروابط واتساب، والموقع الجغرافي التفاعلي عبر الخرائط. كما تم تحسين تجربة المستخدم لتوفير وصول سريع للمعلومات المهمة من أي جهاز.\n\nتم تطوير الموقع مع الاهتمام بالأداء العالي وسرعة التحميل والتوافق الكامل مع الهواتف الذكية والأجهزة اللوحية وأجهزة الكمبيوتر، بالإضافة إلى تحسين محركات البحث (SEO) لضمان ظهور أفضل للعملاء المحتملين.",
+
     // Experience
     exp_section_title: "المسار المهني",
     exp_title: "رحلتي المهنية",
@@ -293,6 +309,22 @@ export const translations = {
     proj_3_badgeRight: "2024",
     proj_3_title: "Noor Al-Islam",
     proj_3_desc: "An interactive web application offering reliable Islamic content, including the Holy Quran, Hadith, religious articles, and precise prayer times based on the user's geographical location.\n\nIn this project, I ensured a calm, eye-friendly user interface, while optimizing performance to guarantee fast content delivery even on slow internet connections, along with full smartphone compatibility.",
+
+    // Project 4
+    proj_4_company: "Dr. Ziad Abu Daqa Center",
+    proj_4_subtitle: "Dermatology & Cosmetology Clinic",
+    proj_4_badgeLeft: "Healthcare",
+    proj_4_badgeRight: "2026",
+    proj_4_title: "Ziad Abu Daqa Medical Center",
+    proj_4_desc: "A professional digital platform for a dermatology and cosmetology clinic. I designed and developed the official website for Dr. Ziad Abu Daqa Center, aiming to deliver a modern digital experience that reflects the center's professionalism and makes it easy for patients to quickly and easily access medical services and the needed information. The website includes informative pages about the doctor, academic qualifications, and treatment services, along with a modern, responsive interface across all devices.\n\nDevelopment focused on high performance, fast loading, and improved UI/UX, along with SEO optimization for better search rankings. The site was also built with a flexible, scalable structure that allows adding new services, a booking system, and an admin dashboard in the future without rebuilding the project.",
+
+    // Project 5
+    proj_5_company: "Badr Alden Roastery",
+    proj_5_subtitle: "Branches Management & Display",
+    proj_5_badgeLeft: "Business",
+    proj_5_badgeRight: "2026",
+    proj_5_title: "Badr Alden Roastery",
+    proj_5_desc: "An integrated digital platform for managing and displaying the branches of Badr Alden Roastery. I designed and developed the official website to provide a modern digital experience that helps customers explore branches, communicate directly, and quickly access product and service information. The website features a professional interface that reflects the brand identity with a focus on simplicity and ease of use.\n\nIt includes a smart branch management system where users can navigate between different branches, view working hours, contact numbers, WhatsApp links, and an interactive geographic location through maps. User experience was also optimized to provide quick access to important information from any device.\n\nDevelopment focused on high performance, fast loading, and full compatibility with smartphones, tablets, and desktops, along with SEO optimization to ensure better visibility for potential customers.",
 
     // Experience
     exp_section_title: "CAREER PATH",

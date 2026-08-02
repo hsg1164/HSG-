@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { FaPlay, FaMosque, FaBookOpen } from "react-icons/fa";
-import { SiReact, SiTypescript, SiNextdotjs, SiNodedotjs, SiFirebase, SiTailwindcss, SiOpenai } from "react-icons/si";
+import { FaPlay, FaMosque, FaBookOpen, FaClinicMedical, FaCoffee } from "react-icons/fa";
+import { SiReact, SiTypescript, SiNextdotjs, SiNodedotjs, SiFirebase, SiTailwindcss, SiOpenai, SiPrisma } from "react-icons/si";
 import { ExternalLink } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -90,6 +90,61 @@ export default function Projects() {
         { label: "Next.js", icon: <SiNextdotjs className="text-black text-xl" /> },
         { label: "TypeScript", icon: <SiTypescript className="text-[#3178C6] text-xl" /> },
         { label: "OpenAI", icon: <SiOpenai className="text-black text-xl" /> },
+        { label: "SEO", icon: <span className="font-bold text-black">SEO</span> }
+      ]
+    },
+    {
+      company: t('proj_4_company'), // Ziad Abu Daqa Medical Center is proj_4
+      subtitle: t('proj_4_subtitle'),
+      badgeLeft: t('proj_4_badgeLeft'),
+      badgeRight: t('proj_4_badgeRight'),
+      imageBadge: "Medical & Healthcare",
+      imageBadgeBg: "bg-[#00E5A0]",
+      title: t('proj_4_title'),
+      desc: t('proj_4_desc'),
+      tags: ["Medical Website", "Healthcare Platform", "SEO Optimized"],
+      bg: "bg-white",
+      textColor: "text-black",
+      pillBg: "bg-black/5",
+      pillBorder: "border-black/5",
+      dotColor: "bg-[#00E5A0]",
+      img: "/assets/images/ziad_abu_daqa.png",
+      logo: <FaClinicMedical className="text-black" />,
+      alignRight: true,
+      imageFirst: false,
+      tools: [
+        { label: "React", icon: <SiReact className="text-[#61DAFB] text-xl" /> },
+        { label: "Next.js", icon: <SiNextdotjs className="text-black text-xl" /> },
+        { label: "TypeScript", icon: <SiTypescript className="text-[#3178C6] text-xl" /> },
+        { label: "Node.js", icon: <SiNodedotjs className="text-[#339933] text-xl" /> },
+        { label: "Prisma", icon: <SiPrisma className="text-[#2D3748] text-xl" /> },
+        { label: "SEO", icon: <span className="font-bold text-black">SEO</span> }
+      ]
+    },
+    {
+      company: t('proj_5_company'), // Badr Alden Roastery is proj_5
+      subtitle: t('proj_5_subtitle'),
+      badgeLeft: t('proj_5_badgeLeft'),
+      badgeRight: t('proj_5_badgeRight'),
+      imageBadge: "Branch Management",
+      imageBadgeBg: "bg-white",
+      title: t('proj_5_title'),
+      desc: t('proj_5_desc'),
+      tags: ["Business Website", "Branch Management", "Customer Experience"],
+      bg: "bg-[#00E5A0]",
+      textColor: "text-black",
+      pillBg: "bg-[#3de298]",
+      pillBorder: "border-black/5",
+      dotColor: "bg-black",
+      img: "/assets/images/badr_roastery.png",
+      logo: <FaCoffee className="text-black" />,
+      alignRight: false,
+      imageFirst: true,
+      tools: [
+        { label: "Next.js", icon: <SiNextdotjs className="text-black text-xl" /> },
+        { label: "TypeScript", icon: <SiTypescript className="text-[#3178C6] text-xl" /> },
+        { label: "Node.js", icon: <SiNodedotjs className="text-[#339933] text-xl" /> },
+        { label: "Tailwind", icon: <SiTailwindcss className="text-[#06B6D4] text-xl" /> },
         { label: "SEO", icon: <span className="font-bold text-black">SEO</span> }
       ]
     }
