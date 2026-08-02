@@ -74,12 +74,12 @@ export default function Navbar() {
       
       if (lenis) {
         // Use Lenis for smooth scrolling if available (duration is in seconds)
-        // Extremely slow motion scroll (10 seconds)
-        lenis.scrollTo(el, { offset: -100, duration: 10 });
-        setTimeout(() => setIsScrolling(false), 10000);
+        // Normal motion scroll (1 second)
+        lenis.scrollTo(el, { offset: -100, duration: 1 });
+        setTimeout(() => setIsScrolling(false), 1000);
       } else {
-        // Fallback: Extremely slow motion scroll (10000ms = 10 seconds)
-        slowScrollTo(el.offsetTop - 100, 10000);
+        // Fallback: Normal motion scroll (1000ms = 1 second)
+        slowScrollTo(el.offsetTop - 100, 1000);
       }
     }
   };
