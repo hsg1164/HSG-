@@ -139,7 +139,7 @@ export default function Hero() {
           <a href="#projects" className="w-full sm:w-auto px-10 py-3.5 bg-primary text-black font-bold rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-3">
             {t('hero_btn_projects')} <ArrowLeft className="w-5 h-5" style={{ transform: lang === 'en' ? 'rotate(180deg)' : 'none' }} />
           </a>
-          <a href="#" className="w-full sm:w-auto px-10 py-3.5 bg-white text-black font-bold rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center gap-3">
+          <a href="/assets/CV---Mohammed-Ziyad.pdf" download="CV---Mohammed-Ziyad.pdf" className="w-full sm:w-auto px-10 py-3.5 bg-white text-black font-bold rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center gap-3">
             {t('hero_btn_cv')} <Download className="w-5 h-5" />
           </a>
         </motion.div>
