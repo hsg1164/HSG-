@@ -110,6 +110,7 @@ export default function Projects() {
       dotColor: "bg-[#00E5A0]",
       img: "/assets/images/ziad_abu_daqa.png",
       logo: <FaClinicMedical className="text-black" />,
+      button: { text: t('projects_view_btn'), link: "https://dr-ziyad.vercel.app/" },
       alignRight: true,
       imageFirst: false,
       tools: [
@@ -138,6 +139,7 @@ export default function Projects() {
       dotColor: "bg-black",
       img: "/assets/images/badr_roastery.png",
       logo: <FaCoffee className="text-black" />,
+      button: { text: t('projects_view_btn'), link: "https://badr-alden.vercel.app/" },
       alignRight: false,
       imageFirst: true,
       tools: [
