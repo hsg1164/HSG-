@@ -25,7 +25,7 @@ export const translations = {
     about_title: "حلول رقمية شاملة",
     about_desc: "أبني تطبيقات ويب متكاملة باستخدام أحدث التقنيات، مع التركيز على الأداء، قابلية التوسع، وتجربة المستخدم الممتازة.",
     about_available: "متاح",
-    about_location: "القاهرة، مصر",
+    about_location: "Stoney Creek, ON - Canada",
     about_btn: "لنعمل معاً",
 
     // Services
@@ -183,7 +183,7 @@ export const translations = {
     contact_success: "تم إرسال رسالتك بنجاح!",
     contact_error: "حدث خطأ أثناء الإرسال، حاول مرة أخرى.",
     contact_location: "الموقع",
-    contact_location_desc: "مُقيم في القاهرة، مصر<br/>متاح للعمل من الشرق الأوسط والعالم",
+    contact_location_desc: "201 Lormont BLVD, Stoney Creek ON<br/>Canada - Postal Code: L8J 0K1",
     contact_whatsapp: "واتساب",
     contact_whatsapp_desc: "متاح للرد السريع على استفساراتك.",
     contact_whatsapp_btn: "تواصل الآن",
@@ -260,7 +260,7 @@ export const translations = {
     about_title: "COMPREHENSIVE DIGITAL SOLUTIONS",
     about_desc: "I build complete web applications using the latest technologies, focusing on performance, scalability, and excellent user experience.",
     about_available: "Available",
-    about_location: "Cairo, Egypt",
+    about_location: "Stoney Creek, ON - Canada",
     about_btn: "Let's Work Together",
 
     // Services
@@ -418,7 +418,7 @@ export const translations = {
     contact_success: "Message sent successfully!",
     contact_error: "An error occurred, please try again.",
     contact_location: "Location",
-    contact_location_desc: "Based in Cairo, Egypt<br/>Available for work worldwide",
+    contact_location_desc: "201 Lormont BLVD, Stoney Creek ON<br/>Canada - Postal Code: L8J 0K1",
     contact_whatsapp: "WhatsApp",
     contact_whatsapp_desc: "Available for quick responses.",
     contact_whatsapp_btn: "Message Now",
