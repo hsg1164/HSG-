@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+artifacts/portfolio/public
 tmp
 out-tsc
 *.tsbuildinfo
