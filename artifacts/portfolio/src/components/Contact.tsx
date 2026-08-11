@@ -129,7 +129,15 @@ export default function Contact() {
               <div className={`w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-primary ${lang === 'ar' ? 'self-start' : 'self-start'}`}><MapPin className="w-6 h-6" /></div>
               <div>
                 <h4 className="font-bold text-white mb-1">{t('contact_location')}</h4>
-                <p className="text-sm text-white/60">{lang === 'ar' ? 'كندا' : 'Canada'}</p>
+                <p className="text-sm text-white/60">201 Lormont BLVD, Stoney Creek ON<br />Canada - Postal Code: L8J 0K1</p>
+              </div>
+            </div>
+
+            <div className="bg-card border border-card-border p-6 rounded-2xl flex flex-col gap-4">
+              <div className={`w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-primary ${lang === 'ar' ? 'self-start' : 'self-start'}`}><Mail className="w-6 h-6" /></div>
+              <div>
+                <h4 className="font-bold text-white mb-1">{t('contact_form_email')}</h4>
+                <a href="mailto:cpshzt@gmail.com" className="text-sm text-primary hover:underline font-mono inline-block" dir="ltr">cpshzt@gmail.com</a>
               </div>
             </div>
 
@@ -137,10 +145,10 @@ export default function Contact() {
               <div>
                 <div className={`w-12 h-12 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center mb-4 ${lang === 'ar' ? 'self-start' : 'self-start'}`}><MessageCircle className="w-6 h-6" /></div>
                 <h4 className="font-bold text-white mb-1">{t('contact_whatsapp')}</h4>
-                <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+1 416-737-7776</p>
+                <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+1 416 737 7776</p>
                 <p className="text-sm text-white/60 mb-6">{t('contact_whatsapp_desc')}</p>
               </div>
-              <a href="https://api.whatsapp.com/send/?phone=14167377776" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
+              <a href="https://wa.me/14167377776" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
                 {t('contact_whatsapp_btn')}
               </a>
             </div>
