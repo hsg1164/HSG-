@@ -41,6 +41,7 @@ export default function Contact() {
             name: formData.name,
             email: formData.email,
             message: formData.subject ? `الموضوع: ${formData.subject}\n\nالرسالة:\n${formData.message}` : formData.message,
+            project_type: 'other',
           }
         ]);
 
