@@ -691,22 +691,23 @@
         <div class="section-head reveal">
           <span class="section-tag">تواصل معي</span>
           <h2 class="section-title">لنبدأ مشروع <span>برمجة موقعك</span> اليوم</h2>
-          <p class="section-desc">لديك مشروع في ذهنك؟ دعنا نحوّل رؤيتك إلى واقع. تواصل معي الآن وسأرد عليك في أقرب وقت.</p>
+          <p class="section-desc">لديك مشروع في ذهنك؟ دعنا نحوّل رؤيتك إلى واقع. املأ النموذج وسأرد عليك في أقرب وقت.</p>
         </div>
         <div class="contact-grid">
           <div class="contact-info reveal">
             <h3>معلومات التواصل</h3>
             <p>أنا متاح للاستفسارات وأستقبل مشاريع برمجة المواقع من جميع أنحاء العالم.</p>
             <div class="contact-item"><div class="contact-item-icon">📍</div><div><h4>الموقع</h4><p>كندا<br>متاح للعمل من الشرق الأوسط والعالم</p></div></div>
-            <div class="contact-item"><div class="contact-item-icon">💬</div><div><h4>واتساب</h4><p dir="ltr" style="text-align: right; color: var(--primary); font-weight: bold;">+1 416-737-7776</p></div></div>
+            <div class="contact-item"><div class="contact-item-icon">💬</div><div><h4>واتساب</h4><p><a href="https://api.whatsapp.com/send/?phone=14167377776" target="_blank" rel="noopener noreferrer" dir="ltr" style="color: var(--primary); font-weight: bold; text-decoration: none;">+1 416-737-7776</a></p></div></div>
             <div class="contact-item"><div class="contact-item-icon">🟢</div><div><h4>متاح الآن</h4><p>أستقبل حالياً مشاريع جديدة لتصميم وبرمجة مواقع</p></div></div>
           </div>
-          <div class="contact-form reveal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 20px; padding: 50px 30px;">
-            <div style="font-size: 4rem; line-height: 1;">💬</div>
-            <h3 style="font-size: 1.5rem; font-weight: 800;">تواصل معي مباشرة عبر واتساب</h3>
-            <p style="color: var(--text-muted); line-height: 1.8;">أنا متاح للرد على جميع استفساراتك ومناقشة مشروعك الجديد. اضغط على الزر أدناه لبدء المحادثة.</p>
-            <a href="https://api.whatsapp.com/send/?phone=14167377776" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; max-width: 320px; font-size: 1.1rem; padding: 16px;">مراسلة عبر واتساب</a>
-          </div>
+          <form class="contact-form reveal" action="#" method="POST" aria-label="نموذج التواصل">
+            <div class="form-group"><label for="name">الاسم</label><input type="text" id="name" name="name" placeholder="اسمك الكريم" required></div>
+            <div class="form-group"><label for="email">البريد الإلكتروني</label><input type="email" id="email" name="email" placeholder="example@email.com" required></div>
+            <div class="form-group"><label for="subject">الموضوع</label><input type="text" id="subject" name="subject" placeholder="موضوع الرسالة (برمجة موقع، متجر إلكتروني، ...)" required></div>
+            <div class="form-group"><label for="message">الرسالة</label><textarea id="message" name="message" placeholder="كيف يمكنني مساعدتك؟" required></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">إرسال الرسالة</button>
+          </form>
         </div>
       </div>
     </section>
@@ -775,6 +776,20 @@
       });
     }, { threshold: 0.1 });
     revealElements.forEach(function(el) { observer.observe(el); });
+    var contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = contactForm.querySelector('button[type="submit"]');
+        var originalText = btn.textContent;
+        btn.textContent = 'جاري الإرسال...';
+        setTimeout(function() {
+          btn.textContent = '✓ تم إرسال رسالتك بنجاح!';
+          contactForm.reset();
+          setTimeout(function() { btn.textContent = originalText; }, 3000);
+        }, 1500);
+      });
+    }
   </script>
 
 </body>

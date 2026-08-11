@@ -85,9 +85,42 @@ export default function Contact() {
         </motion.div>
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          {/* Info Cards */}
+          {/* Form */}
           <motion.div 
             initial={{ opacity: 0, x: lang === 'ar' ? 30 : -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className={`w-full lg:w-2/3 bg-card border border-card-border p-8 rounded-2xl ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+          >
+            <form className="flex flex-col gap-6" onSubmit={handleSubmit} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold text-white/80">{t('contact_form_name')}</label>
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder={t('contact_form_name_ph')} className={`bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold text-white/80">{t('contact_form_email')}</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder={t('contact_form_email_ph')} className="bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-left" dir="ltr" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-white/80">{t('contact_form_subject')}</label>
+                <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder={t('contact_form_subject_ph')} className={`bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-white/80">{t('contact_form_message')}</label>
+                <textarea rows={5} name="message" value={formData.message} onChange={handleChange} required placeholder={t('contact_form_message_ph')} className={`bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none ${lang === 'ar' ? 'text-right' : 'text-left'}`}></textarea>
+              </div>
+              <button type="submit" disabled={loading} className="bg-primary text-black font-bold py-4 rounded-xl hover:bg-primary/90 transition-colors text-lg mt-2 flex items-center justify-center gap-2">
+                {loading && <Loader2 className="w-5 h-5 animate-spin" />}
+                {loading ? t('contact_btn_sending') : t('contact_btn')}
+              </button>
+            </form>
+          </motion.div>
+
+          {/* Info Cards */}
+          <motion.div 
+            initial={{ opacity: 0, x: lang === 'ar' ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className={`w-full lg:w-1/3 flex flex-col gap-4 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
@@ -99,7 +132,7 @@ export default function Contact() {
                 <p className="text-sm text-white/60">{lang === 'ar' ? 'كندا' : 'Canada'}</p>
               </div>
             </div>
-            
+
             <div className="bg-card border border-card-border p-6 rounded-2xl flex flex-col gap-4 flex-1 justify-between">
               <div>
                 <div className={`w-12 h-12 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center mb-4 ${lang === 'ar' ? 'self-start' : 'self-start'}`}><MessageCircle className="w-6 h-6" /></div>
@@ -107,22 +140,10 @@ export default function Contact() {
                 <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+1 416-737-7776</p>
                 <p className="text-sm text-white/60 mb-6">{t('contact_whatsapp_desc')}</p>
               </div>
+              <a href="https://api.whatsapp.com/send/?phone=14167377776" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
+                {t('contact_whatsapp_btn')}
+              </a>
             </div>
-          </motion.div>
-
-          {/* WhatsApp Direct */}
-          <motion.div 
-            initial={{ opacity: 0, x: lang === 'ar' ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className={`w-full lg:w-2/3 bg-card border border-card-border p-8 rounded-2xl flex flex-col items-center justify-center text-center gap-6`}
-          >
-            <div className="text-6xl mb-4 text-[#25D366]"><MessageCircle className="w-16 h-16 inline-block" /></div>
-            <h3 className="text-2xl font-bold text-white">{lang === 'ar' ? 'تواصل معي مباشرة عبر واتساب' : 'Contact Me Directly via WhatsApp'}</h3>
-            <p className="text-white/60 text-lg max-w-md mx-auto">{lang === 'ar' ? 'أنا متاح للرد على جميع استفساراتك ومناقشة مشروعك الجديد. اضغط على الزر أدناه لبدء المحادثة.' : 'I am available to answer all your inquiries and discuss your new project. Click the button below to start chatting.'}</p>
-            <a href="https://api.whatsapp.com/send/?phone=14167377776" target="_blank" rel="noopener noreferrer" className="w-full max-w-sm py-4 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors text-lg mt-4">
-              {t('contact_whatsapp_btn')}
-            </a>
           </motion.div>
         </div>
       </div>
