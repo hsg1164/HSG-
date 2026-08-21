@@ -145,10 +145,10 @@ export default function Contact() {
               <div>
                 <div className={`w-12 h-12 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center mb-4 ${lang === 'ar' ? 'self-start' : 'self-start'}`}><MessageCircle className="w-6 h-6" /></div>
                 <h4 className="font-bold text-white mb-1">{t('contact_whatsapp')}</h4>
-                <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+1 416 737 7776</p>
+                <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+20 120 049 5954</p>
                 <p className="text-sm text-white/60 mb-6">{t('contact_whatsapp_desc')}</p>
               </div>
-              <a href="https://wa.me/14167377776" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
+              <a href="https://wa.me/message/4TYV7IWEUNAXN1" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
                 {t('contact_whatsapp_btn')}
               </a>
             </div>
