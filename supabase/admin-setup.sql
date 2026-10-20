@@ -1,11 +1,19 @@
 -- ═══════════════════════════════════════════════════════════════════════════
---  إعدادات لوحة التحكم الآمنة — Creative Design Hub
---  نفّذ هذا الملف مرة واحدة في: Supabase Dashboard → SQL Editor → New query → Run
+--  ⚙️  إعدادات لوحة التحكم الآمنة — Creative Design Hub
+--  ─────────────────────────────────────────────────────────────────────────
+--  📍 نفّذ هذا الملف مرة واحدة في:
+--     Supabase Dashboard → SQL Editor → New query → Run
+--
+--  ✅ afterwards: افتح  /admin  واكتب كلمة المرور فقط — تم كل شيء.
+--     (حساب المدير يُنشأ تلقائياً عند أول دخول، ما في أي زر إنشاء حساب)
+--
+--  🔒 هذا الملف لا يحتوي أي كلمة مرور — كلمة المرور تُكتب في المتصفح فقط
+--     وتُخزَّن مُجزّأة (bcrypt) داخل Supabase.
 -- ═══════════════════════════════════════════════════════════════════════════
 
 
 -- ───────────────────────────────────────────────────────────────────────────
--- 1) جدول المديرين المسموح لهم (قائمة بيضاء — List of allowed admins)
+-- 1) جدول المديرين المسموح لهم (قائمة بيضاء)
 -- ───────────────────────────────────────────────────────────────────────────
 create table if not exists public.admin_users (
   id         uuid primary key default gen_random_uuid(),
@@ -16,8 +24,7 @@ create table if not exists public.admin_users (
 
 comment on table public.admin_users is 'قائمة البريد الإلكتروني المصرّح لها بالوصول للوحة التحكم';
 
--- 📧 بريد المدير — بريدك هو (cpshzt@gmail.com) افتراضياً.
---    لو غيّرته، عدّل السطر أدناه قبل التنفيذ.
+-- 📧 بريد المدير — مُعبّأ مسبقاً. عدّله لو أردت بريداً آخر.
 insert into public.admin_users (email, full_name)
 values ('cpshzt@gmail.com', 'Mohamed Ziad')
 on conflict (email) do update set full_name = excluded.full_name;
@@ -26,7 +33,7 @@ on conflict (email) do update set full_name = excluded.full_name;
 -- ───────────────────────────────────────────────────────────────────────────
 -- 2) تجهيز جدول الرسائل (لا يمسح البيانات الموجودة)
 -- ───────────────────────────────────────────────────────────────────────────
--- يُنشأ الجدول فقط إن لم يكن موجوداً (لو كان موجوداً لن يتأثر)
+-- يُنشأ فقط إن لم يكن موجوداً (لو موجود أصلاً لن يتأثر)
 create table if not exists public.messages (
   id           uuid primary key default gen_random_uuid(),
   name         text not null,
@@ -43,23 +50,20 @@ create table if not exists public.messages (
 alter table public.messages enable row level security;
 
 alter table public.messages add column if not exists created_at timestamptz not null default now();
-alter table public.messages add column if not exists status       text        not null default 'new';
-alter table public.messages add column if not exists is_read      boolean     not null default false;
-alter table public.messages add column if not exists subject      text;
-alter table public.messages add column if not exists replied_at   timestamptz;
+alter table public.messages add column if not exists status     text        not null default 'new';
+alter table public.messages add column if not exists is_read    boolean     not null default false;
+alter table public.messages add column if not exists subject    text;
+alter table public.messages add column if not exists replied_at timestamptz;
 
 create index if not exists messages_created_at_idx on public.messages (created_at desc);
 create index if not exists messages_is_read_idx    on public.messages (is_read);
 
 
 -- ───────────────────────────────────────────────────────────────────────────
--- 3) سياسات الأمان (RLS)
---    - الجميع يستطيع الإرسال فقط (نموذج التواصل)
---    - المديرون المسجّلون فقط يستطيعون القراءة/التعديل/الحذف
+-- 3) دالة فحص المدير
+--    SECURITY DEFINER حتى لا يحدث استدعاء ذاتي على الجدول
+--    (استدعاء الجدول من داخل سياسته يسبب خطأ infinite recursion في Postgres)
 -- ───────────────────────────────────────────────────────────────────────────
-
--- دالة فحص المدير — SECURITY DEFINER حتى لا يحدث استدعاء ذاتي على الجدول
--- (استدعاء الجدول من داخل سياسته يسبب خطأ infinite recursion في Postgres)
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -77,7 +81,14 @@ $$;
 revoke all on function public.is_admin() from public;
 grant execute on function public.is_admin() to anon, authenticated;
 
--- منع أي قراءة مباشرة للرسائل من زائر غير مسجّل
+
+-- ───────────────────────────────────────────────────────────────────────────
+-- 4) سياسات الأمان (RLS)
+--    - الجميع يُرسل فقط (نموذج التواصل)
+--    - المدير المسجّل فقط يقرأ / يعدّل / يحذف
+-- ───────────────────────────────────────────────────────────────────────────
+
+-- لا قراءة مباشرة للرسائل من أي زائر
 drop policy if exists "public select messages" on public.messages;
 create policy "public select messages" on public.messages
   for select to anon using (false);
@@ -90,23 +101,19 @@ create policy "public insert messages" on public.messages
 -- القراءة للمديرين فقط
 drop policy if exists "admins read messages" on public.messages;
 create policy "admins read messages" on public.messages
-  for select to authenticated
-  using (public.is_admin());
+  for select to authenticated using (public.is_admin());
 
 -- التعديل للمديرين فقط
 drop policy if exists "admins update messages" on public.messages;
 create policy "admins update messages" on public.messages
-  for update to authenticated
-  using (public.is_admin())
-  with check (true);
+  for update to authenticated using (public.is_admin()) with check (true);
 
 -- الحذف للمديرين فقط
 drop policy if exists "admins delete messages" on public.messages;
 create policy "admins delete messages" on public.messages
-  for delete to authenticated
-  using (public.is_admin());
+  for delete to authenticated using (public.is_admin());
 
--- جدول المديرين: المدير يقرأ صفّه فقط — ولا يُقرأ من أي زائر
+-- جدول المديرين: المدير يقرأ صفّه فقط
 alter table public.admin_users enable row level security;
 drop policy if exists "admins read admin_users" on public.admin_users;
 create policy "admins read admin_users" on public.admin_users
@@ -115,9 +122,9 @@ create policy "admins read admin_users" on public.admin_users
 
 
 -- ───────────────────────────────────────────────────────────────────────────
--- 4) منع إنشاء حسابات من خارج القائمة البيضاء
---    ⚠️ مهم: نفّذ الخطوة (1) أولاً — بريدك مدرج مسبقاً، لذا يمكنك إنشاء حسابك.
---    أي شخص آخر يحاول إنشاء حساب في مشروعك سيتم رفضه.
+-- 5) منع إنشاء أي حساب خارج القائمة البيضاء
+--    → يضمن أن حساب المدير فقط هو القادر على تسجيل الدخول.
+--    → ولأن بريدك مُدرج في الخطوة (1)، يُنشأ حسابك تلقائياً بلا مشاكل.
 -- ───────────────────────────────────────────────────────────────────────────
 create or replace function public.enforce_admin_signup()
 returns trigger
@@ -142,6 +149,6 @@ create trigger on_auth_user_created_enforce_admin
 
 
 -- ───────────────────────────────────────────────────────────────────────────
--- 5) التحقق — يجب أن يُرجع صفاً واحداً (بريدك)
+-- 6) التحقق — يجب أن يُرجع صفاً واحداً (بريدك)
 -- ───────────────────────────────────────────────────────────────────────────
 -- select email from public.admin_users;

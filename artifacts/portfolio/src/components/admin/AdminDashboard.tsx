@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAdminT } from "@/hooks/use-admin-t";
 import { siteConfig, whatsappDirectLink } from "@/lib/site";
 import {
   fetchMessages,
@@ -91,7 +92,8 @@ function initials(name: string): string {
 }
 
 export default function AdminDashboard({ auth }: Props) {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = useAdminT();
   const isRtl = lang === "ar";
   const BackArrow = isRtl ? ArrowRight : ArrowLeft;
 

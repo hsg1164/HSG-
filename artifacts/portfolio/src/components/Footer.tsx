@@ -5,9 +5,11 @@ import { FiGithub } from "react-icons/fi";
 import { ArrowLeft, ArrowUp, ShieldCheck } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useAdminT } from "@/hooks/use-admin-t";
 
 export default function Footer() {
   const { t, lang } = useLanguage();
+  const adminT = useAdminT();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -159,11 +161,11 @@ export default function Footer() {
           <a
             href="/admin"
             className="inline-flex items-center gap-1.5 text-[10px] text-white/25 hover:text-[#4FF0A7] transition-colors"
-            aria-label={t('admin_title')}
-            title={t('admin_title')}
+            aria-label={adminT('admin_title')}
+            title={adminT('admin_title')}
           >
             <ShieldCheck className="w-3.5 h-3.5" />
-            {t('admin_title')}
+            {adminT('admin_title')}
           </a>
         </div>
       </div>
