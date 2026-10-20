@@ -1,5 +1,11 @@
 {
   "framework": "vite",
   "buildCommand": "vite build --config vite.config.ts",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Clients() {
-  const { t, lang } = useLanguage();
-  const row1 = t('tech_row1') as unknown as string[];
-  const row2 = t('tech_row2') as unknown as string[];
+  const { t, tList, lang } = useLanguage();
+  const row1 = tList('tech_row1');
+  const row2 = tList('tech_row2');
 
   return (
     <section className="py-24 px-4 overflow-hidden bg-transparent relative">

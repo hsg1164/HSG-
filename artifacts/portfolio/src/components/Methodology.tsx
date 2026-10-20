@@ -2,63 +2,63 @@ import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Methodology() {
-  const { t, lang } = useLanguage();
+  const { t, tList, lang } = useLanguage();
   const steps = [
     {
       num: "01",
       title: t('method_1_title'),
       subtitle: t('method_1_subtitle'),
       desc: t('method_1_desc'),
-      tags: t('method_1_tags') as unknown as string[]
+      tags: tList('method_1_tags')
     },
     {
       num: "02",
       title: t('method_2_title'),
       subtitle: t('method_2_subtitle'),
       desc: t('method_2_desc'),
-      tags: t('method_2_tags') as unknown as string[]
+      tags: tList('method_2_tags')
     },
     {
       num: "03",
       title: t('method_3_title'),
       subtitle: t('method_3_subtitle'),
       desc: t('method_3_desc'),
-      tags: t('method_3_tags') as unknown as string[]
+      tags: tList('method_3_tags')
     },
     {
       num: "04",
       title: t('method_4_title'),
       subtitle: t('method_4_subtitle'),
       desc: t('method_4_desc'),
-      tags: t('method_4_tags') as unknown as string[]
+      tags: tList('method_4_tags')
     },
     {
       num: "05",
       title: t('method_5_title'),
       subtitle: t('method_5_subtitle'),
       desc: t('method_5_desc'),
-      tags: t('method_5_tags') as unknown as string[]
+      tags: tList('method_5_tags')
     },
     {
       num: "06",
       title: t('method_6_title'),
       subtitle: t('method_6_subtitle'),
       desc: t('method_6_desc'),
-      tags: t('method_6_tags') as unknown as string[]
+      tags: tList('method_6_tags')
     },
     {
       num: "07",
       title: t('method_7_title'),
       subtitle: t('method_7_subtitle'),
       desc: t('method_7_desc'),
-      tags: t('method_7_tags') as unknown as string[]
+      tags: tList('method_7_tags')
     },
     {
       num: "08",
       title: t('method_8_title'),
       subtitle: t('method_8_subtitle'),
       desc: t('method_8_desc'),
-      tags: t('method_8_tags') as unknown as string[]
+      tags: tList('method_8_tags')
     }
   ];
 

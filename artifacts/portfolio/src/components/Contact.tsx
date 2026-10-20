@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, MessageCircle, Loader2 } from "lucide-react";
+import { MapPin, Mail, Loader2, Copy, Check } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabase";
+import { siteConfig } from "@/lib/site";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Contact() {
@@ -15,6 +17,20 @@ export default function Contact() {
     message: ""
   });
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyPhone = async () => {
+    try {
+      await navigator.clipboard.writeText(siteConfig.phoneTel);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast({
+        title: lang === 'ar' ? "رقم الواتساب" : "WhatsApp number",
+        description: siteConfig.phoneDisplay,
+      });
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -137,21 +153,66 @@ export default function Contact() {
               <div className={`w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-primary ${lang === 'ar' ? 'self-start' : 'self-start'}`}><Mail className="w-6 h-6" /></div>
               <div>
                 <h4 className="font-bold text-white mb-1">{t('contact_form_email')}</h4>
-                <a href="mailto:cpshzt@gmail.com" className="text-sm text-primary hover:underline font-mono inline-block" dir="ltr">cpshzt@gmail.com</a>
+                <a href={`mailto:${siteConfig.email}`} className="text-sm text-primary hover:underline font-mono inline-block" dir="ltr">{siteConfig.email}</a>
               </div>
             </div>
 
-            <div className="bg-card border border-card-border p-6 rounded-2xl flex flex-col gap-4 flex-1 justify-between">
-              <div>
-                <div className={`w-12 h-12 bg-[#25D366]/20 text-[#25D366] rounded-full flex items-center justify-center mb-4 ${lang === 'ar' ? 'self-start' : 'self-start'}`}><MessageCircle className="w-6 h-6" /></div>
-                <h4 className="font-bold text-white mb-1">{t('contact_whatsapp')}</h4>
-                <p className="text-sm text-white/60 font-mono mb-2" dir="ltr">+20 120 049 5954</p>
-                <p className="text-sm text-white/60 mb-6">{t('contact_whatsapp_desc')}</p>
+            {/* WhatsApp Card */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#25D366]/70 via-[#25D366]/15 to-transparent overflow-hidden flex-1"
+            >
+              <div className="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#25D366]/20 blur-3xl pointer-events-none" />
+              <div className="relative bg-card border border-card-border rounded-2xl p-6 flex flex-col gap-4 h-full overflow-hidden">
+                <div className="absolute inset-x-0 -top-24 h-40 bg-[#25D366]/10 blur-3xl pointer-events-none" />
+
+                <div className="relative flex items-center gap-4">
+                  <div className="relative shrink-0">
+                    <span className="absolute inset-0 rounded-full bg-[#25D366]/30 animate-ping" />
+                    <div className="relative w-14 h-14 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-2xl flex items-center justify-center shadow-[0_8px_30px_rgba(37,211,102,0.35)]">
+                      <FaWhatsapp className="w-8 h-8 text-black" />
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-white mb-0.5">{t('contact_whatsapp')}</h4>
+                    <p className="text-xs text-[#25D366] font-bold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+                      {t('contact_whatsapp_online')}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="relative flex items-center gap-2 bg-background/60 border border-card-border rounded-xl px-4 py-3 group">
+                  <p className="text-base text-white font-mono tracking-wider truncate" dir="ltr">
+                    {siteConfig.phoneDisplay}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={copyPhone}
+                    aria-label={lang === 'ar' ? 'نسخ الرقم' : 'Copy number'}
+                    className="ms-auto shrink-0 w-8 h-8 rounded-lg bg-white/5 hover:bg-[#25D366]/20 text-white/60 hover:text-[#25D366] flex items-center justify-center transition-colors"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-[#25D366]" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                <p className="relative text-sm text-white/60 leading-relaxed">{t('contact_whatsapp_desc')}</p>
+
+                <a
+                  href={siteConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative mt-auto w-full py-3.5 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black font-bold rounded-xl text-center hover:brightness-110 transition-all shadow-[0_10px_30px_-8px_rgba(37,211,102,0.6)] overflow-hidden group"
+                >
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <span className="relative flex items-center justify-center gap-2">
+                    <FaWhatsapp className="w-5 h-5" />
+                    {t('contact_whatsapp_btn')}
+                  </span>
+                </a>
               </div>
-              <a href="https://wa.me/message/4TYV7IWEUNAXN1" target="_blank" rel="noopener noreferrer" className="w-full py-3 bg-[#25D366] text-black font-bold rounded-xl text-center hover:bg-[#25D366]/90 transition-colors">
-                {t('contact_whatsapp_btn')}
-              </a>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

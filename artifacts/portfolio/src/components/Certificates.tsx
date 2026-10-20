@@ -2,11 +2,29 @@ import { motion } from "framer-motion";
 import { ExternalLink, CheckCircle2, Clock, Medal } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { SiGoogleanalytics } from "react-icons/si";
+import type { ReactNode } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+
+type CertificateItem = {
+  title: string;
+  issuer: string;
+  validUntil: string;
+  logo: ReactNode;
+  status: string;
+  statusIcon: ReactNode;
+  statusColor: string;
+  desc: string;
+  pills: { text: string; style: string }[];
+  bg: string;
+  text: string;
+  button: { text: string; style: string; link: string };
+  badge?: string;
+  progress?: string;
+};
 
 export default function Certificates() {
   const { t, lang } = useLanguage();
-  const certs = [
+  const certs: CertificateItem[] = [
     {
       title: "JavaScript Algorithms and Data Structures",
       issuer: "freeCodeCamp",
@@ -132,11 +150,9 @@ export default function Certificates() {
                 {cert.title}
               </h3>
 
-              {/* @ts-ignore */}
               {cert.badge && (
                 <div className={`mb-4 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-bold">
-                    {/* @ts-ignore */}
                     <Medal className="w-3.5 h-3.5" /> {cert.badge}
                   </span>
                 </div>

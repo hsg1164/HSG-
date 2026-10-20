@@ -9,6 +9,10 @@ out-tsc
 .expo
 .expo-shared
 
+# local credentials (never commit)
+ADMIN-CREDENTIALS.local.md
+*.local.md
+
 # dependencies
 node_modules
 

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { FaEnvelope } from "react-icons/fa";
+import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiGithub } from "react-icons/fi";
-import { ArrowLeft, ArrowUp } from "lucide-react";
+import { ArrowLeft, ArrowUp, ShieldCheck } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Footer() {
@@ -79,7 +80,7 @@ export default function Footer() {
                 {t('footer_bio')}
               </p>
               <div className="flex gap-3">
-                <a href="mailto:cpshzt@gmail.com" className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                <a href={`mailto:${siteConfig.email}`} className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
                   <FaEnvelope className="w-3.5 h-3.5" />
                 </a>
                 <a href="https://github.com/HSG6" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors shadow-[1px_1px_0px_rgba(0,0,0,1)]">
@@ -110,13 +111,24 @@ export default function Footer() {
               <h4 className="text-xs font-bold mb-4 opacity-70 uppercase">{t('footer_contact')}</h4>
               <ul className={`space-y-2 text-center mb-4 ${lang === 'ar' ? 'md:text-left' : 'md:text-right'}`} dir="ltr">
                 <li>
-                  <a href="mailto:cpshzt@gmail.com" className="text-xs font-bold hover:opacity-70 transition-opacity">
-                    cpshzt@gmail.com
+                  <a href={`mailto:${siteConfig.email}`} className="text-xs font-bold hover:opacity-70 transition-opacity">
+                    {siteConfig.email}
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+201200495954" className="text-xs font-bold hover:opacity-70 transition-opacity">
-                    +20 120 049 5954
+                  <a href={`tel:${siteConfig.phoneTel}`} className="text-xs font-bold hover:opacity-70 transition-opacity">
+                    {siteConfig.phoneDisplay}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={siteConfig.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold hover:opacity-70 transition-opacity inline-flex items-center gap-1.5"
+                  >
+                    <FaWhatsapp className="w-3.5 h-3.5" />
+                    {t('contact_whatsapp')}
                   </a>
                 </li>
                 <li className="text-xs font-bold">
@@ -144,6 +156,15 @@ export default function Footer() {
           <p className="text-[10px] text-white/40 font-medium" dir="ltr">
             © {new Date().getFullYear()} {t('footer_name')}. {t('footer_rights')}
           </p>
+          <a
+            href="/admin"
+            className="inline-flex items-center gap-1.5 text-[10px] text-white/25 hover:text-[#4FF0A7] transition-colors"
+            aria-label={t('admin_title')}
+            title={t('admin_title')}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            {t('admin_title')}
+          </a>
         </div>
       </div>
 

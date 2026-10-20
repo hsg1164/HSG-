@@ -25,7 +25,9 @@
 
 ## Architecture decisions
 
-- Static frontend only — no backend, no database
+- Static frontend (Vite SPA) with Supabase as the backend for the contact form + admin dashboard
+- Contact form writes to Supabase `messages` table; admin reads it via RLS-protected queries
+- Admin auth uses Supabase Auth (hashed passwords, signed JWT sessions) — see `ADMIN.md` and `supabase/admin-setup.sql`
 - All colors derived from #00E5A0 (mint green) accent on #080808 dark background
 - framer-motion whileInView for scroll-triggered reveals
 - Infinite CSS marquee via @keyframes translateX (no JS)
@@ -46,7 +48,8 @@ Arabic RTL personal portfolio for Mohammed Ziyad with: Hero, Skills Marquee, Abo
 
 - react-icons/fa: use FaFacebook (not FaMeta), FaSnapchat (not FaSnapchatGhost), FaMobile (not FaMobileAlt)
 - Google Fonts @import must be the VERY FIRST line in index.css before any other @import
-- No backend — this is a purely static frontend artifact
+- Backend is Supabase — `messages` table must have RLS enabled (run `supabase/admin-setup.sql`) before the admin dashboard can read anything
+- `/admin` is a client-side route — SPA rewrite to `/index.html` is required on the host (already configured in `artifact.toml` and `vercel.json`)
 
 ## Pointers
 

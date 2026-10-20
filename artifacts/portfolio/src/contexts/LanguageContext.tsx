@@ -1,12 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { translations, TranslationKey } from '../lib/translations';
+import {
+  translations,
+  StringTranslationKey,
+  ArrayTranslationKey,
+} from '../lib/translations';
 
 type Language = 'ar' | 'en';
 
 interface LanguageContextType {
   lang: Language;
   toggleLanguage: () => void;
-  t: (key: TranslationKey) => string;
+  /** يجلب نصاً (String) */
+  t: (key: StringTranslationKey) => string;
+  /** يجلب قائمة نصوص (Array) */
+  tList: (key: ArrayTranslationKey) => string[];
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -34,12 +41,18 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLang(prev => (prev === 'ar' ? 'en' : 'ar'));
   };
 
-  const t = (key: TranslationKey): string => {
-    return translations[lang][key] || key;
+  const t = (key: StringTranslationKey): string => {
+    const value = translations[lang][key];
+    return typeof value === 'string' ? value : key;
+  };
+
+  const tList = (key: ArrayTranslationKey): string[] => {
+    const value = translations[lang][key];
+    return Array.isArray(value) ? [...value] : [];
   };
 
   return (
-    <LanguageContext.Provider value={{ lang, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ lang, toggleLanguage, t, tList }}>
       {children}
     </LanguageContext.Provider>
   );

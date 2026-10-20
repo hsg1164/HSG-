@@ -1,9 +1,9 @@
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function SkillsMarquee() {
-  const { t } = useLanguage();
-  const row1 = t('tech_row1') as unknown as string[];
-  const row2 = t('tech_row2') as unknown as string[];
+  const { tList } = useLanguage();
+  const row1 = tList('tech_row1');
+  const row2 = tList('tech_row2');
 
   return (
     <section className="py-12 bg-transparent overflow-hidden flex flex-col gap-6 relative" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
