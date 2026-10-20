@@ -10,6 +10,7 @@ export type AuthErrorKind =
   | "not_allowed"
   | "needs_confirmation"
   | "signups_disabled"
+  | "network"
   | "generic";
 
 export interface AdminAuth {
@@ -27,6 +28,8 @@ export interface AdminAuth {
 /** ترجمة أخطاء Supabase إلى أنواع مفهومة */
 function classifyError(message: string): AuthErrorKind {
   const msg = message.toLowerCase();
+  if (msg.includes("failed to fetch") || msg.includes("network") || msg.includes("load failed"))
+    return "network";
   if (msg.includes("invalid login credentials")) return "invalid_credentials";
   if (msg.includes("already registered") || msg.includes("already been registered")) return "email_taken";
   if (msg.includes("not authorized as an administrator")) return "not_allowed";

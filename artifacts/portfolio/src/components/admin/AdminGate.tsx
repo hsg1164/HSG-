@@ -91,6 +91,8 @@ export default function AdminGate({ auth }: Props) {
         return t("admin_err_confirm_email");
       case "signups_disabled":
         return t("admin_err_signups_disabled");
+      case "network":
+        return t("admin_err_network");
       default:
         return message || t("admin_err_generic");
     }

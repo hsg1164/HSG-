@@ -27,6 +27,10 @@
 
 ## 2) لوحة التحكم `/admin`
 
+> ⚠️ **مهم:** كل شيء في الموقع (نموذج التواصل + لوحة التحكم) مرتبط بمشروع Supabase
+> المحدد في `artifacts/portfolio/.env` عبر `VITE_SUPABASE_URL`.
+> لو غيّرت المشروع، غيّر هذا الرابط — وإلا الموقع كله ما راح يشتغل صح.
+
 ### ما هي؟
 صفحة كاملة داخل الموقع على المسار `/admin` — تشاهد فيها **كل الرسائل** التي يرسلها الزوار من نموذج التواصل، مع:
 
@@ -112,12 +116,10 @@ supabase/admin-setup.sql
 
 | المشكلة | الحل |
 |---|---|
-| **"تحذير أمني: رسائل الزوار مكشوفة"** | اللوحة فحصت نفسها ووجدت أن أي زائر يستطيع قراءة `messages`. نفّذ `admin-setup.sql` فوراً — هذا أهم خطوة. |
-| **"Database setup required"** في اللوحة | لم يُنفَّذ `admin-setup.sql` بعد. نفّذه ثم اضغط تحديث. |
+| **"تعذّر الاتصال بقاعدة البيانات"** | رابط Supabase في `artifacts/portfolio/.env` غلط أو المشروع محذوف. تأكد أن `VITE_SUPABASE_URL` صحيح. **وإذا عندك متغيرات بيئة في Vercel لازم تحدّثها هي كمان** لأنها تسبق ملف `.env`. |
+| **"كلمة المرور غير صحيحة"** | تأكد من كتابة كلمة المرور كما هي بالضبط (انظر `ADMIN-CREDENTIALS.local.md`). |
 | **"إنشاء الحسابات معطّل"** | Supabase → Authentication → Providers → Email → أطفئ **Confirm Email**، أو أضف الحساب يدوياً من **Users → Add user** بنفس كلمة المرور. |
 | **"بريدك غير مُدرج ضمن المديرين"** | نفّذ في Supabase SQL Editor:<br>`insert into public.admin_users (email) values ('cpshzt@gmail.com');` |
-| **"Invalid email or password"** | تأكد من كتابة كلمة المرور كما هي بالضبط (انظر `ADMIN-CREDENTIALS.local.md`). |
-| **"This email is not authorized as an administrator"** | البريد غير مدرج في `admin_users` — أضفه (الخطوة ①). |
 | **"تم قفل اللوحة مؤقتاً"** | انتظر 15 دقيقة ثم أعد المحاولة. |
 | **اللوحة تُفتح ولا تظهر رسائل** | نفّذ `admin-setup.sql` — بدون RLS لن تظهر أي رسائل للمدير. |
 | **404 على `/admin` بعد النشر** | تأكد من إعداد إعادة التوجيه: `artifacts/portfolio/vercel.json` يحتوي `rewrites` (Vercel)، و Replit موجود مسبقاً في `artifact.toml`. |
