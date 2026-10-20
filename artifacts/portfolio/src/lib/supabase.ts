@@ -20,3 +20,21 @@ export const supabasePublic = createClient(supabaseUrl || '', supabaseAnonKey ||
     detectSessionInUrl: false,
   },
 });
+
+/**
+ * هل الخطأ بسبب عمود غير موجود في الجدول؟
+ * (مثال: عمود project_type لسه ما اتضافش في قاعدة البيانات)
+ */
+export function isMissingColumnError(error: { code?: string; message?: string } | null): boolean {
+  if (!error) return false;
+  const code = error.code ?? "";
+  const msg = (error.message ?? "").toLowerCase();
+  return (
+    code === "42703" ||
+    code === "PGRST204" ||
+    msg.includes("column") ||
+    msg.includes("does not exist") ||
+    msg.includes("unknown column") ||
+    msg.includes("schema cache")
+  );
+}

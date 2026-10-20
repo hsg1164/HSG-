@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Loader2, Copy, Check } from "lucide-react";
+import { MapPin, Mail, Loader2, Copy, Check, Phone, Store, Building2, Globe, Share2, Shapes } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabase";
+import { supabase, isMissingColumnError } from "@/lib/supabase";
 import { siteConfig } from "@/lib/site";
+import { PROJECT_TYPES, type ProjectType } from "@/lib/project-types";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export default function Contact() {
@@ -13,8 +14,10 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
-    message: ""
+    message: "",
+    projectType: "general" as ProjectType
   });
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -48,32 +51,52 @@ export default function Contact() {
     }
 
     setLoading(true);
-    
+
     try {
-      const { error } = await supabase
-        .from('messages')
-        .insert([
+      const fullMessage = formData.subject
+        ? `الموضوع: ${formData.subject}\n\nالرسالة:\n${formData.message}`
+        : formData.message;
+
+      // 1) المحاولة الكاملة — تتطلّب الأعمدة الجديدة (phone / subject / project_type)
+      const { error } = await supabase.from('messages').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          subject: formData.subject || null,
+          message: formData.message,
+          project_type: formData.projectType,
+        }
+      ]);
+
+      // 2) احتياطي: لو الأعمدة الجديدة لسه ما اتضافتش في القاعدة
+      //    (نفّذ supabase/add-contact-fields.sql) نُرسل بالشكل القديم — ما يفشلش النموذج
+      if (error && isMissingColumnError(error)) {
+        const { error: fallbackError } = await supabase.from('messages').insert([
           {
             name: formData.name,
             email: formData.email,
-            message: formData.subject ? `الموضوع: ${formData.subject}\n\nالرسالة:\n${formData.message}` : formData.message,
-            project_type: 'other',
+            message: fullMessage,
           }
         ]);
-
-      if (error) throw error;
+        if (fallbackError) throw fallbackError;
+      } else if (error) {
+        throw error;
+      }
 
       toast({
         title: t('contact_success'),
         description: lang === 'ar' ? "شكراً لتواصلك، سأرد عليك في أقرب وقت." : "Thank you for reaching out, I will get back to you shortly."
       });
       
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "", projectType: "general" });
     } catch (error) {
       console.error(error);
       toast({
         title: lang === 'ar' ? "حدث خطأ" : "Error",
-        description: t('contact_error'),
+        description: lang === 'ar'
+          ? "تعذّر إرسال الرسالة. تأكد من تنفيذ ملف SQL (supabase/add-contact-fields.sql) في Supabase."
+          : "Could not send the message. Make sure you ran supabase/add-contact-fields.sql in Supabase.",
         variant: "destructive"
       });
     } finally {
@@ -119,6 +142,56 @@ export default function Contact() {
                   <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder={t('contact_form_email_ph')} className="bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-left" dir="ltr" />
                 </div>
               </div>
+
+              {/* رقم الواتساب أو الهاتف */}
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-white/80 flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-primary" />
+                  {t('contact_form_phone')}
+                  <span className="text-[10px] font-normal text-white/35">({t('contact_form_phone_optional')})</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder={t('contact_form_phone_ph')}
+                  className={`bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                  dir="ltr"
+                />
+              </div>
+
+              {/* نوع المشروع */}
+              <div className="flex flex-col gap-3">
+                <label className="text-sm font-semibold text-white/80">{t('contact_form_project_type')}</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {PROJECT_TYPES.map((type) => {
+                    const Icon = type.icon;
+                    const selected = formData.projectType === type.value;
+                    return (
+                      <button
+                        type="button"
+                        key={type.value}
+                        onClick={() => setFormData((prev) => ({ ...prev, projectType: type.value }))}
+                        aria-pressed={selected}
+                        className={`group flex items-center gap-2.5 rounded-xl border px-3.5 py-3 text-start transition-all ${
+                          selected
+                            ? "border-primary bg-primary/10 shadow-[0_0_0_1px_hsl(var(--primary))]"
+                            : "border-border bg-background hover:border-primary/40 hover:bg-white/[0.03]"
+                        }`}
+                      >
+                        <span className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${type.tone} ${selected ? "ring-1 ring-primary/40" : "opacity-70 group-hover:opacity-100"}`}>
+                          <Icon className="w-4 h-4" />
+                        </span>
+                        <span className={`text-[11px] font-bold leading-tight ${selected ? "text-primary" : "text-white/60"}`}>
+                          {lang === 'ar' ? type.label : type.labelEn}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-semibold text-white/80">{t('contact_form_subject')}</label>
                 <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder={t('contact_form_subject_ph')} className={`bg-background border border-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`} />

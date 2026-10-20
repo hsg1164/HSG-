@@ -4,6 +4,7 @@ export interface AdminMessage {
   id: string;
   name: string;
   email: string;
+  phone?: string | null;
   message: string;
   subject?: string | null;
   project_type?: string | null;
@@ -53,6 +54,7 @@ function normalize(raw: Record<string, unknown>): AdminMessage {
     id: String(raw.id ?? ""),
     name: String(raw.name ?? "—"),
     email: String(raw.email ?? ""),
+    phone: (raw.phone as string | null) ?? null,
     message: body || message,
     subject: (raw.subject as string | null) ?? (subjectMatch ? subjectMatch[1].trim() : null),
     project_type: (raw.project_type as string | null) ?? null,
@@ -168,9 +170,18 @@ export async function isMessagesPubliclyExposed(): Promise<boolean> {
 /** تصدير الرسائل إلى CSV */
 export function messagesToCsv(messages: AdminMessage[]): string {
   const escape = (value: string) => `"${String(value ?? "").replace(/"/g, '""')}"`;
-  const header = ["id", "name", "email", "subject", "message", "project_type", "created_at"];
+  const header = ["id", "name", "email", "phone", "subject", "message", "project_type", "created_at"];
   const rows = messages.map((m) =>
-    [m.id, m.name, m.email, m.subject ?? "", m.message, m.project_type ?? "", m.created_at ?? ""]
+    [
+      m.id,
+      m.name,
+      m.email,
+      m.phone ?? "",
+      m.subject ?? "",
+      m.message,
+      m.project_type ?? "",
+      m.created_at ?? "",
+    ]
       .map(escape)
       .join(","),
   );

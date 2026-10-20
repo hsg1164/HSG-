@@ -38,6 +38,7 @@ create table if not exists public.messages (
   id           uuid primary key default gen_random_uuid(),
   name         text not null,
   email        text not null,
+  phone        text,
   message      text not null default '',
   project_type text,
   subject      text,
@@ -53,10 +54,16 @@ alter table public.messages add column if not exists created_at timestamptz not 
 alter table public.messages add column if not exists status     text        not null default 'new';
 alter table public.messages add column if not exists is_read    boolean     not null default false;
 alter table public.messages add column if not exists subject    text;
-alter table public.messages add column if not exists replied_at timestamptz;
+alter table public.messages add column if not exists phone      text;
+alter table public.messages add column if not exists project_type text;
 
-create index if not exists messages_created_at_idx on public.messages (created_at desc);
-create index if not exists messages_is_read_idx    on public.messages (is_read);
+comment on column public.messages.phone is 'رقم الواتساب أو الهاتف الذي كتبه الزائر';
+comment on column public.messages.project_type is 'نوع المشروع: social / ecommerce / company / general / other';
+
+create index if not exists messages_created_at_idx   on public.messages (created_at desc);
+create index if not exists messages_is_read_idx      on public.messages (is_read);
+create index if not exists messages_project_type_idx on public.messages (project_type);
+create index if not exists messages_phone_idx        on public.messages (phone);
 
 
 -- ───────────────────────────────────────────────────────────────────────────

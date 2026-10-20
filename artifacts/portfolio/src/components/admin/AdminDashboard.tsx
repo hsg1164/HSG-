@@ -20,11 +20,14 @@ import {
   ExternalLink,
   MessageSquare,
   ChevronDown,
+  Phone,
+  PhoneCall,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAdminT } from "@/hooks/use-admin-t";
 import { siteConfig, whatsappDirectLink } from "@/lib/site";
+import { getProjectType, PROJECT_TYPES } from "@/lib/project-types";
 import {
   fetchMessages,
   setMessageRead,
@@ -108,6 +111,7 @@ export default function AdminDashboard({ auth }: Props) {
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
+  const [projectFilter, setProjectFilter] = useState<string>("all");
   const [readState, setReadState] = useState<Record<string, boolean>>(loadReadState);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [sqlCopied, setSqlCopied] = useState(false);
@@ -189,15 +193,27 @@ export default function AdminDashboard({ auth }: Props) {
     return messages.filter((m) => {
       if (filter === "unread" && isRead(m)) return false;
       if (filter === "read" && !isRead(m)) return false;
+      if (projectFilter !== "all" && (m.project_type ?? "other") !== projectFilter) return false;
       if (!term) return true;
       return (
         (m.name ?? "").toLowerCase().includes(term) ||
         (m.email ?? "").toLowerCase().includes(term) ||
+        (m.phone ?? "").toLowerCase().includes(term) ||
         (m.message ?? "").toLowerCase().includes(term) ||
         (m.subject ?? "").toLowerCase().includes(term)
       );
     });
-  }, [messages, filter, search, isRead]);
+  }, [messages, filter, search, isRead, projectFilter]);
+
+  /** عدد الرسائل لكل نوع مشروع (لعرضه على أزرار الفلترة) */
+  const projectCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const m of messages) {
+      const key = m.project_type ?? "other";
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    return counts;
+  }, [messages]);
 
   const toggleRead = async (m: AdminMessage) => {
     const next = !isRead(m);
@@ -237,7 +253,18 @@ export default function AdminDashboard({ auth }: Props) {
 
   const replyWhatsapp = (m: AdminMessage) => {
     const text = `مرحباً ${m.name}،\nشكراً لتواصلك معي عبر الموقع بخصوص: ${m.subject || "استفساركم"}.\n`;
-    window.open(whatsappDirectLink(text), "_blank", "noopener,noreferrer");
+    // لو الزائر كتب رقمه، نردّ عليه مباشرة على رقمه — وإلا نستخدم رقم الموقع
+    const customerPhone = (m.phone ?? "").replace(/[^\d]/g, "");
+    const url =
+      customerPhone.length >= 8
+        ? `https://wa.me/${customerPhone}?text=${encodeURIComponent(text)}`
+        : whatsappDirectLink(text);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const callPhone = (m: AdminMessage) => {
+    const phone = (m.phone ?? "").replace(/[^\d+]/g, "");
+    if (phone) window.location.href = `tel:${phone}`;
   };
 
   const replyEmail = (m: AdminMessage) => {
@@ -421,6 +448,42 @@ export default function AdminDashboard({ auth }: Props) {
           </div>
         </div>
 
+        {/* فلترة حسب نوع المشروع */}
+        {Object.keys(projectCounts).length > 0 && (
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <span className="text-[11px] text-white/30 ms-1">{t("admin_project_type")}</span>
+            <button
+              onClick={() => setProjectFilter("all")}
+              className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
+                projectFilter === "all"
+                  ? "bg-white/15 text-white"
+                  : "bg-white/5 text-white/45 hover:bg-white/10 hover:text-white/70"
+              }`}
+            >
+              {t("admin_filter_all")} ({messages.length})
+            </button>
+            {PROJECT_TYPES.map((p) => {
+              const count = projectCounts[p.value] ?? 0;
+              if (!count) return null;
+              const Icon = p.icon;
+              const active = projectFilter === p.value;
+              return (
+                <button
+                  key={p.value}
+                  onClick={() => setProjectFilter(active ? "all" : p.value)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
+                    active ? "bg-[#4FF0A7] text-black" : "bg-white/5 text-white/55 hover:bg-white/10 hover:text-white/80"
+                  }`}
+                >
+                  <Icon className="w-3 h-3" />
+                  {lang === "ar" ? p.label : p.labelEn}
+                  <span className={active ? "opacity-70" : "text-white/35"}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         {/* قائمة الرسائل */}
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 gap-3 text-white/40">
@@ -454,6 +517,10 @@ export default function AdminDashboard({ auth }: Props) {
               {filtered.map((m) => {
                 const read = isRead(m);
                 const open = expanded === m.id;
+                const project = getProjectType(m.project_type);
+                const ProjectIcon = project.icon;
+                const projectLabel = lang === "ar" ? project.label : project.labelEn;
+                const projectTone = project.tone;
                 return (
                   <motion.article
                     key={m.id}
@@ -488,14 +555,28 @@ export default function AdminDashboard({ auth }: Props) {
                             {m.name}
                           </span>
                           {!read && <CircleDot className="w-3.5 h-3.5 text-[#4FF0A7] shrink-0" />}
+                          {m.project_type && (
+                            <span
+                              className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-md ${projectTone}`}
+                            >
+                              <ProjectIcon className="w-3 h-3" />
+                              {projectLabel}
+                            </span>
+                          )}
                           {m.subject && (
                             <span className="text-[11px] px-2 py-0.5 rounded-md bg-white/8 text-white/55 truncate max-w-[16rem]">
                               {m.subject}
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-white/35 mb-2" dir="ltr">
-                          {m.email}
+                        <p className="text-[11px] text-white/35 mb-2 flex items-center gap-3 flex-wrap" dir="ltr">
+                          <span>{m.email}</span>
+                          {m.phone && (
+                            <span className="inline-flex items-center gap-1 text-[#4FF0A7]/70">
+                              <Phone className="w-3 h-3" />
+                              {m.phone}
+                            </span>
+                          )}
                         </p>
                         <p
                           className={`text-xs leading-relaxed line-clamp-2 ${read ? "text-white/40" : "text-white/65"}`}
@@ -543,6 +624,15 @@ export default function AdminDashboard({ auth }: Props) {
                                 <Mail className="w-4 h-4" />
                                 {t("admin_reply_email")}
                               </button>
+                              {m.phone && (
+                                <button
+                                  onClick={() => callPhone(m)}
+                                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 text-white/65 text-xs font-bold hover:bg-white/10 transition-all"
+                                >
+                                  <PhoneCall className="w-4 h-4" />
+                                  {t("admin_call")}
+                                </button>
+                              )}
                               <button
                                 onClick={() => void toggleRead(m)}
                                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 text-white/65 text-xs font-bold hover:bg-white/10 transition-all"
@@ -619,6 +709,7 @@ create table if not exists public.messages (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   email text not null,
+  phone text,
   message text not null default '',
   project_type text,
   subject text,
@@ -633,6 +724,9 @@ alter table public.messages add column if not exists created_at timestamptz not 
 alter table public.messages add column if not exists status text not null default 'new';
 alter table public.messages add column if not exists is_read boolean not null default false;
 alter table public.messages add column if not exists subject text;
+alter table public.messages add column if not exists phone text;
+alter table public.messages add column if not exists project_type text;
+create index if not exists messages_project_type_idx on public.messages (project_type);
 
 -- 4) دالة فحص المدير
 create or replace function public.is_admin()
